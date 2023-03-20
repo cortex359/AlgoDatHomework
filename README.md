@@ -1,12 +1,13 @@
 # MaTSE Hausaufgaben, SoSe 2023
+## Algorithmen und Datenstrukturen
 
 Fachhochschule Aachen, [Angewandte Mathematik und Informatik B.Sc.](https://www.fh-aachen.de/studium/angewandte-mathematik-und-informatik-bsc)
 
-Modul: [Algorithmen und Datenstrukturen](https://www.campus.fh-aachen.de/campus/all/module.asp?fmodulecode=92340) / [IT-Grundlagen](https://www.campus.fh-aachen.de/campus/all/module.asp?fmodulecode=92130)
+Modul: [Algorithmen und Datenstrukturen](https://www.campus.fh-aachen.de/campus/all/module.asp?fmodulecode=92130)
 
 ## Hausaufgabengruppe 03
 - [Christian Rene Thelen](mailto:christian.thelen@rwth-aachen.de)
-- Samuel Thesing
+- [Samuel Thesing](mailto:samuel.thesing@rwth-aachen.de)
 - Michael Conrads
 
 ## Abgaberichtlinien
