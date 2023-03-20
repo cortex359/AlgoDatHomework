@@ -3,6 +3,19 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AlgoDatHomework.iml" filepath="$PROJECT_DIR$/AlgoDatHomework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h01/h01.iml" filepath="$PROJECT_DIR$/h01/h01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h02/h02.iml" filepath="$PROJECT_DIR$/h02/h02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h03/h03.iml" filepath="$PROJECT_DIR$/h03/h03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h04/h04.iml" filepath="$PROJECT_DIR$/h04/h04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h05/h05.iml" filepath="$PROJECT_DIR$/h05/h05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h06/h06.iml" filepath="$PROJECT_DIR$/h06/h06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h07/h07.iml" filepath="$PROJECT_DIR$/h07/h07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h08/h08.iml" filepath="$PROJECT_DIR$/h08/h08.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h09/h09.iml" filepath="$PROJECT_DIR$/h09/h09.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h10/h10.iml" filepath="$PROJECT_DIR$/h10/h10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h11/h11.iml" filepath="$PROJECT_DIR$/h11/h11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h12/h12.iml" filepath="$PROJECT_DIR$/h12/h12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/h13/h13.iml" filepath="$PROJECT_DIR$/h13/h13.iml" />
     </modules>
   </component>
 </project>

@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3600b589-dfca-443a-bf84-0db85fdfcde9" name="Changes" comment="" />
+    <list default="true" id="3600b589-dfca-443a-bf84-0db85fdfcde9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AlgoDatHomework.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h01/h01.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h02/h02.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h03/h03.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h04/h04.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h05/h05.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h06/h06.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h07/h07.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h08/h08.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h09/h09.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h10/h10.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h11/h11.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h12/h12.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/h13/h13.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +43,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -32,7 +62,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679321147311</updated>
+      <workItem from="1679321148389" duration="714000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
