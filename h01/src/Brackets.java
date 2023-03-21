@@ -16,15 +16,12 @@ import java.util.Set;
 public class Brackets {
 
     private static char invert(char c) {
-        switch (c) {
-            case '[':
-                return ']';
-            case '(':
-                return ')';
-            case '{':
-                return '}';
-        }
-        return '-';
+        return switch (c) {
+            case '[' -> ']';
+            case '(' -> ')';
+            case '{' -> '}';
+            default -> '-';
+        };
     }
 
     /**
