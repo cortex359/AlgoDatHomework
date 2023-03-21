@@ -9,26 +9,26 @@ public class Brackets {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (c == '{' || c == '[' || c == '(') {
-                stack.addLast(c);
+                stack.push(c);
                 continue;
             }
             if (c == '}') {
-                if (stack.size() == 0 || stack.peekLast() != '{') {
+                if (stack.size() == 0 || stack.peek() != '{') {
                     return false;
                 }
-                stack.removeLast();
+                stack.pop();
             }
             if (c == ']') {
-                if (stack.size() == 0 || stack.peekLast() != '[') {
+                if (stack.size() == 0 || stack.peek() != '[') {
                     return false;
                 }
-                stack.removeLast();
+                stack.pop();
             }
             if (c == ')') {
-                if (stack.size() == 0 || stack.peekLast() != '(') {
+                if (stack.size() == 0 || stack.peek() != '(') {
                     return false;
                 }
-                stack.removeLast();
+                stack.pop();
             }
         }
         return stack.size() == 0;
