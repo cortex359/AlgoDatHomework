@@ -11,6 +11,10 @@
  * @author Michael Conrads, michael.conrads@rwth-aachen.de
  */
 public class BracketsTest {
+    /**
+     * Test zur überprüfung der Brackets Klasse.
+     * @param args Komandozeilenparameter, welche ignoriert werden.
+     */
     public static void main(String[] args) {
         String[] tests = new String[] {
             "(([[]]))", "([][](()()))", "([{{{}}()[]}])",

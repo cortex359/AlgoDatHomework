@@ -15,6 +15,11 @@ import java.util.Set;
  */
 public class Brackets {
 
+    /**
+     * invert liefert für eine übergebene, öffnende Klammer die passende schließende Klammer zurück.
+     * @param c Öffnende Klammer: { [ (
+     * @return char schließende Klammer oder `-` sollte das übergebene Zeichen keine der bekannten Klammern gewesen sein.
+     */
     private static char invert(char c) {
         return switch (c) {
             case '[' -> ']';
@@ -25,9 +30,11 @@ public class Brackets {
     }
 
     /**
-     * isValid überprüft einen String, bestehend aus Klammern auf Gültigkeit.
+     * isValid überprüft die Klammern eines String auf Gültigkeit. Gültig ist ein String, wenn jede geöffnete Klammer
+     * der gleichen Form auch durch ihr Gegenstück in richtiger Reihenfolge geschlossen wird.
+     * Zeichen, die keine Klammern sind, werden dabei ignoriert.
      * @param s Zu überprüfender Ausdruck.
-     * @return True, wenn valide, ansonsten false.
+     * @return boolean True, wenn valide, ansonsten false.
      */
     public static boolean isValid(String s) {
         Set<Character> open = Set.of('(', '[', '{');
@@ -36,12 +43,13 @@ public class Brackets {
         ArrayDeque<Character> stack = new ArrayDeque<>();
         for (var c :  s.toCharArray()) {
             if (open.contains(c)) {
+                // Öffnende Klammer auf Stack ablegen.
                 stack.push(c);
-            } else if (close.contains(c)) {
-                if (stack.isEmpty() || invert(stack.pop()) != c)
-                    return false;
+            } else if (close.contains(c) && (stack.isEmpty() || invert(stack.pop()) != c)) {
+                // Schließende Klammer von Stack entfernen. Abbrechen, wenn Stack leer ist oder Klammer nicht passt.
+                return false;
             }
         }
-        return (stack.isEmpty());
+        return stack.isEmpty();
     }
 }
