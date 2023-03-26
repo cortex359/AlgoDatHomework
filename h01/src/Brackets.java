@@ -7,7 +7,7 @@ import java.util.Set;
  * Hausaufgabe 01: Brackets
  * Algorithmen und Datenstrukturen, SoSe 2023
  * Aufgaben vom 20.03.2023
- * Abgabe der Lösungen am 27.03.2023
+ * Abgabe der Lösungen am 26.03.2023
  *
  * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
  * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
