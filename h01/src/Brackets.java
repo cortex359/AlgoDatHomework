@@ -7,7 +7,7 @@ import java.util.Set;
  * Hausaufgabe 01: Brackets
  * Algorithmen und Datenstrukturen, SoSe 2023
  * Aufgaben vom 20.03.2023
- * Abgabe der Lösungen am 26.03.2023
+ * Abgabe der Loesungen am 26.03.2023
  *
  * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
  * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
@@ -16,9 +16,9 @@ import java.util.Set;
 public class Brackets {
 
     /**
-     * invert liefert für eine übergebene, öffnende Klammer die passende schließende Klammer zurück.
-     * @param c Öffnende Klammer: { [ (
-     * @return char schließende Klammer oder `-` sollte das übergebene Zeichen keine der bekannten Klammern gewesen sein.
+     * invert liefert fuer eine uebergebene, oeffnende Klammer die passende schliessende Klammer zurueck.
+     * @param c Oeffnende Klammer: { [ (
+     * @return char schliessende Klammer oder - sollte das uebergebene Zeichen keine der bekannten Klammern gewesen sein.
      */
     private static char invert(char c) {
         return switch (c) {
@@ -30,10 +30,10 @@ public class Brackets {
     }
 
     /**
-     * isValid überprüft die Klammern eines String auf Gültigkeit. Gültig ist ein String, wenn jede geöffnete Klammer
-     * der gleichen Form auch durch ihr Gegenstück in richtiger Reihenfolge geschlossen wird.
+     * isValid ueberprueft die Klammern eines String auf Gueltigkeit. Gueltig ist ein String, wenn jede geoeffnete Klammer
+     * der gleichen Form auch durch ihr Gegenstueck in richtiger Reihenfolge geschlossen wird.
      * Zeichen, die keine Klammern sind, werden dabei ignoriert.
-     * @param s Zu überprüfender Ausdruck.
+     * @param s Zu ueberpruefender Ausdruck.
      * @return boolean True, wenn valide, ansonsten false.
      */
     public static boolean isValid(String s) {
@@ -43,10 +43,10 @@ public class Brackets {
         ArrayDeque<Character> stack = new ArrayDeque<>();
         for (var c :  s.toCharArray()) {
             if (open.contains(c)) {
-                // Öffnende Klammer auf Stack ablegen.
+                // Oeffnende Klammer auf Stack ablegen.
                 stack.push(c);
             } else if (close.contains(c) && (stack.isEmpty() || invert(stack.pop()) != c)) {
-                // Schließende Klammer von Stack entfernen. Abbrechen, wenn Stack leer ist oder Klammer nicht passt.
+                // Schliessende Klammer von Stack entfernen. Abbrechen, wenn Stack leer ist oder Klammer nicht passt.
                 return false;
             }
         }

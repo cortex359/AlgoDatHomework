@@ -4,7 +4,7 @@
  * Hausaufgabe 01: Brackets
  * Algorithmen und Datenstrukturen, SoSe 2023
  * Aufgaben vom 20.03.2023
- * Abgabe der Lösungen am 26.03.2023
+ * Abgabe der Loesungen am 26.03.2023
  *
  * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
  * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
@@ -12,7 +12,7 @@
  */
 public class BracketsTest {
     /**
-     * Test zur überprüfung der Brackets Klasse.
+     * Test zur Ueberpruefung der Brackets Klasse.
      * @param args Komandozeilenparameter, welche ignoriert werden.
      */
     public static void main(String[] args) {
