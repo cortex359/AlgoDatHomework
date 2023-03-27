@@ -10,8 +10,8 @@ public class MyHashSet<K> {
 
     private ArrayList<K>[] initializeNewHashTable(int size){
         ArrayList<K>[] table = new ArrayList[size];
-        for(int i = 0; i < hashTable.length; i++){
-            hashTable[i] = new ArrayList<K>();
+        for(int i = 0; i < table.length; i++){
+            table[i] = new ArrayList<>();
         }
         return table;
     }
@@ -26,18 +26,23 @@ public class MyHashSet<K> {
     }
     
     public boolean add(K element){
-        if(count > hashTable.length*2){
-            this.grow();
-        }
         if(this.contains(element))
             return true;
+        
+        if(count > hashTable.length*2)
+            this.grow();
+        
         hashTable[element.hashCode() % hashTable.length].add(element);
         count++;
         return false;
     }
     
     public boolean delete(K element){
-        return hashTable[element.hashCode()%hashTable.length].remove(element);
+        if(!this.contains(element))
+            return false;
+        
+        this.count--;
+        return hashTable[element.hashCode() % hashTable.length].remove(element);
     }
     public boolean contains(K element){
         for(ArrayList<K> list : hashTable){
