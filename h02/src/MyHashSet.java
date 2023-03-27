@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class MyHashSet<K> {
     private int count;
-    @SuppressWarnings("unchecked")
     private ArrayList<K>[] hashTable;
     
     public MyHashSet(){
