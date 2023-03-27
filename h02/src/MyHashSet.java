@@ -4,8 +4,6 @@ public class MyHashSet<K> {
 
     private int count = 0;
 
-
-    @SuppressWarnings("unchecked")
     private ArrayList<K>[] arr;
 
     public MyHashSet() {
@@ -16,7 +14,6 @@ public class MyHashSet<K> {
     }
 
     private void grow() {
-        @SuppressWarnings("unchecked")
         ArrayList<K>[] newArr = new ArrayList[this.arr.length * 2];
         for (int i = 0; i < newArr.length; i++) {
             newArr[i] = new ArrayList<K>();
@@ -42,7 +39,11 @@ public class MyHashSet<K> {
     }
 
     public boolean delete(K element) {
-        return this.arr[element.hashCode() % this.arr.length].remove(element);
+        if (!this.arr[element.hashCode() % this.arr.length].remove(element)) {
+            return false;
+        }
+        this.count--;
+        return true;
     }
 
     public boolean contains(K element) {

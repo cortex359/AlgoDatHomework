@@ -9,7 +9,7 @@ public class MyHashSetTest {
             myHash.add(i);
         }
         System.out.println(myHash.contains(5)); // true
-        myHash.delete(5);
+        System.out.println(myHash.delete(5));
         System.out.println(myHash.contains(5)); // false
         ArrayList<Integer> el = myHash.getElements();
         System.out.println(el); // Zahlen 0..29 ausser der 5 unsortiert
