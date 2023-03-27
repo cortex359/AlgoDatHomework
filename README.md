@@ -8,7 +8,7 @@ Modul: [Algorithmen und Datenstrukturen](https://www.campus.fh-aachen.de/campus/
 ## Hausaufgabengruppe 03
 - [Christian Rene Thelen](mailto:christian.thelen@rwth-aachen.de)
 - [Samuel Thesing](mailto:samuel.thesing@rwth-aachen.de)
-- Michael Conrads
+- [Michael Conrads](mailto:)
 
 ## Abgaberichtlinien
 
@@ -18,4 +18,20 @@ Vor Abgabe ausführen:
 
 ```zsh
 sed -Ee 's/ä/ae/g; s/ö/oe/g; s/ü/ue/g; s/Ü/Ue/g; s/Ö/Oe/g; s/Ä/Ae/g; s/ß/ss/g' -i *.java
+```
+
+## Header
+```java
+/**
+ * <Klassenbeschreibung>
+ * ==========================================
+ * Hausaufgabe 00: <Topic>
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 20.03.2023
+ * Abgabe der Lösungen am 27.03.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 ```
