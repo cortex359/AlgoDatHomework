@@ -46,9 +46,14 @@ public class MyHashSet<K> {
         this.arr = newArr;
     }
 
-    public int getCount() {
+    /**
+     * Gibt die Anzahl der Elemente in der Hashtabelle zurück.
+     * @return int Anzahl der Elemente in der Hashtabelle.
+     */
+    public int size() {
         return this.count;
     }
+
     /**
      * Fügt der Menge ein Element hinzu.
      * @param element Element, welches der Menge hinzugefügt werden soll.

@@ -20,20 +20,24 @@ public class MyHashSetTest {
      * @param args Komandozeilenparameter, welche ignoriert werden.
      */
     public static void main(String[] args) {
+        System.out.println("Initialisiere myHash als MyHashSet<Integer> Objekt mit den Zahlen von 0-29.");
         MyHashSet<Integer> myHash = new MyHashSet<>();
         for (int i = 0; i < 30; i++) {
             myHash.add(i);
         }
-        System.out.println(myHash.contains(5));         // true
-        System.out.println(myHash.delete(5));   // true
-        System.out.println(myHash.contains(5));         // false
 
+        System.out.println("Teste die Funktionen contains(K element) und delete(K element):");
+        System.out.printf("  %-18s -> %b\n", "myHash.contains(5)", myHash.contains(5));       // true
+        System.out.printf("  %-18s -> %b\n", "myHash.delete(5)",   myHash.delete(5)); // true
+        System.out.printf("  %-18s -> %b\n", "myHash.contains(5)", myHash.contains(5));       // false
+
+        System.out.println("Teste die Funktion getElements():");
         ArrayList<Integer> el = myHash.getElements();
-        System.out.println(el); // Zahlen 0..29 ausser der 5 unsortiert
+        System.out.printf("  %s\n", el); // Zahlen 0..29 ausser der 5 unsortiert
         Collections.sort(el);
-        System.out.println(el); // 0,1,2,3,4,6,7,....,29
+        System.out.printf("  %s\n", el); // 0,1,2,3,4,6,7,....,29
 
-
+        System.out.println(myHash.size());
     }
 
 }
