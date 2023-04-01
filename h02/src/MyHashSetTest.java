@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * MyHashSetTest testet die Funktionen der Klasse MyHashSetTest.
+ * =============================================================
+ * Hausaufgabe 02: Hashtabelle
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 27.03.2023
+ * Abgabe der Loesungen am 02.04.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class MyHashSetTest {
 
     public static void main(String[] args) {
