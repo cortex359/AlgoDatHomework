@@ -18,7 +18,7 @@ public class MyHashSet<K> {
     private int count = 0;
 
     // arr ist ein Array of ArrayLists, also ein Feld von Teillisten
-    @SuppressWarnings("unchecked") // Um die Zuweisung von ArrayList[] zu ArrayList<K>[] this.arr ohne Warnung durchzuführen.
+    @SuppressWarnings("unchecked") // Um die Zuweisung von ArrayList[] zu ArrayList<K>[] this.arr ohne Warnung durchzufuehren.
     private ArrayList<K>[] arr = new ArrayList[10];
 
     /**
@@ -32,7 +32,7 @@ public class MyHashSet<K> {
      * Verdoppelt die Anzahl der Teillisten und sortiert die Elemente neu ein.
      */
     private void grow() {
-        @SuppressWarnings("unchecked") // Um die Zuweisung einer neuen ArrayList[] zu ArrayList<K>[] newArr ohne Warnung durchzuführen.
+        @SuppressWarnings("unchecked") // Um die Zuweisung einer neuen ArrayList[] zu ArrayList<K>[] newArr ohne Warnung durchzufuehren.
         ArrayList<K>[] newArr = new ArrayList[this.arr.length * 2];
         Arrays.setAll(newArr, element -> new ArrayList<K>());
 
@@ -45,20 +45,20 @@ public class MyHashSet<K> {
     }
 
     /**
-     * Fügt der Menge ein Element hinzu.
+     * Fuegt der Menge ein Element hinzu.
      *
-     * @param element Element, welches der Menge hinzugefügt werden soll.
+     * @param element Element, welches der Menge hinzugefuegt werden soll.
      *
-     * @return boolean True, wenn das Element schon existiert, ansonsten False. Achtung: Dies verhält sich anders als
-     * Collection.add(E e), welches True zurückgibt, wenn die Liste durch den Aufruf verändert wurde.
+     * @return boolean True, wenn das Element schon existiert, ansonsten False. Achtung: Dies verhaelt sich anders als
+     * Collection.add(E e), welches True zurueckgibt, wenn die Liste durch den Aufruf veraendert wurde.
      */
     public boolean add(K element) {
         if (this.contains(element)) {
             return true;
         }
 
-        // Statt den Füllgrad der Hashtabelle zu berechnen (Anzahl der Elemente / Anzahl der Teillisten) und zu prüfen,
-        // ob dieser größer 2 ist, lässt sich äquivalent prüfen, ob die Anzahl der Elemente größer als die Anzahl der
+        // Statt den Fuellgrad der Hashtabelle zu berechnen (Anzahl der Elemente / Anzahl der Teillisten) und zu pruefen,
+        // ob dieser groesser 2 ist, laesst sich aequivalent pruefen, ob die Anzahl der Elemente groesser als die Anzahl der
         // Teillisten * 2 ist.
         if (this.count >= this.arr.length * 2) {
             grow();
@@ -70,9 +70,9 @@ public class MyHashSet<K> {
     }
 
     /**
-     * Löscht das angegebene Element, falls dieses existiert; dabei wird die Anzahl der Teillisten nicht verkleinert.
+     * Loescht das angegebene Element, falls dieses existiert; dabei wird die Anzahl der Teillisten nicht verkleinert.
      *
-     * @param element Zu löschendes Element.
+     * @param element Zu loeschendes Element.
      *
      * @return boolean True, wenn das Element existiert hat, ansonsten False.
      */
@@ -85,20 +85,20 @@ public class MyHashSet<K> {
     }
 
     /**
-     * Gibt zurück, ob das Element in der Hashtabelle existiert.
+     * Gibt zurueck, ob das Element in der Hashtabelle existiert.
      *
      * @param element Zu suchendes Element.
      *
-     * @return boolean True, wenn die Hashtabelle das Element enthält, anderenfalls False.
+     * @return boolean True, wenn die Hashtabelle das Element enthaelt, anderenfalls False.
      */
     public boolean contains(K element) {
         return this.arr[element.hashCode() % this.arr.length].contains(element);
     }
 
     /**
-     * Gibt eine ArrayList mit allen Elementen der Hashtabelle zurück.
+     * Gibt eine ArrayList mit allen Elementen der Hashtabelle zurueck.
      *
-     * @return ArrayList, welche alle Elemente der Hashtabelle enthält.
+     * @return ArrayList, welche alle Elemente der Hashtabelle enthaelt.
      */
     public ArrayList<K> getElements() {
         ArrayList<K> elements = new ArrayList<>();
