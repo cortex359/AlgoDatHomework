@@ -18,22 +18,21 @@ public class MyHashSet<K> {
     private int count = 0;
 
     // arr ist ein Array of ArrayLists, also ein Feld von Teillisten
-    private ArrayList<K>[] arr;
+    @SuppressWarnings("unchecked") // Um die Zuweisung von ArrayList[] zu ArrayList<K>[] this.arr ohne Warnung durchzuführen.
+    private ArrayList<K>[] arr = new ArrayList[10];
 
     /**
      * Erzeugt ein neues MyHashSet Objekt mit 10 Teillisten.
      */
-    @SuppressWarnings("unchecked") // Um die Zuweisung von ArrayList[] zu ArrayList<K>[] this.arr ohne Warnung durchzuführen.
     public MyHashSet() {
-        this.arr = new ArrayList[10];
         Arrays.setAll(this.arr, element -> new ArrayList<K>());
     }
 
     /**
      * Verdoppelt die Anzahl der Teillisten und sortiert die Elemente neu ein.
      */
-    @SuppressWarnings("unchecked") // Um die Zuweisung einer neuen ArrayList[] zu ArrayList<K>[] newArr ohne Warnung durchzuführen.
     private void grow() {
+        @SuppressWarnings("unchecked") // Um die Zuweisung einer neuen ArrayList[] zu ArrayList<K>[] newArr ohne Warnung durchzuführen.
         ArrayList<K>[] newArr = new ArrayList[this.arr.length * 2];
         Arrays.setAll(newArr, element -> new ArrayList<K>());
 
