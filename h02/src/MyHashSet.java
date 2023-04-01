@@ -3,17 +3,17 @@ import java.util.ArrayList;
 public class MyHashSet<K> {
 
     private int count = 0;
-
-    private ArrayList<K>[] arr;
+    @SuppressWarnings("unchecked")
+    private ArrayList<K>[] arr = new ArrayList[10];
 
     public MyHashSet() {
-        this.arr = new ArrayList[10];
         for (int i = 0; i < this.arr.length; i++) {
             this.arr[i] = new ArrayList<K>();
         }
     }
 
     private void grow() {
+        @SuppressWarnings("unchecked")
         ArrayList<K>[] newArr = new ArrayList[this.arr.length * 2];
         for (int i = 0; i < newArr.length; i++) {
             newArr[i] = new ArrayList<K>();
