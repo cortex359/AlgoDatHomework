@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * MyHashSet implementiert eine generische Hashtabelle mit Teillisten.
@@ -13,7 +14,6 @@ import java.util.ArrayList;
  * @author Michael Conrads, michael.conrads@rwth-aachen.de
  */
 public class MyHashSet<K> {
-
     // count ist die Anzahl der Elemente
     private int count = 0;
 
@@ -23,21 +23,20 @@ public class MyHashSet<K> {
     /**
      * Erzeugt ein neues MyHashSet Objekt mit 10 Teillisten.
      */
+    @SuppressWarnings("unchecked") // Um die Zuweisung von ArrayList[] zu ArrayList<K>[] this.arr ohne Warnung durchzuführen.
     public MyHashSet() {
         this.arr = new ArrayList[10];
-        for (int i = 0; i < this.arr.length; i++) {
-            this.arr[i] = new ArrayList<K>();
-        }
+        Arrays.setAll(this.arr, element -> new ArrayList<K>());
     }
 
     /**
      * Verdoppelt die Anzahl der Teillisten und sortiert die Elemente neu ein.
      */
+    @SuppressWarnings("unchecked") // Um die Zuweisung einer neuen ArrayList[] zu ArrayList<K>[] newArr ohne Warnung durchzuführen.
     private void grow() {
         ArrayList<K>[] newArr = new ArrayList[this.arr.length * 2];
-        for (int i = 0; i < newArr.length; i++) {
-            newArr[i] = new ArrayList<K>();
-        }
+        Arrays.setAll(newArr, element -> new ArrayList<K>());
+
         for (ArrayList<K> arrPart : this.arr) {
             for (K element : arrPart) {
                 newArr[element.hashCode() % newArr.length].add(element);
@@ -47,16 +46,10 @@ public class MyHashSet<K> {
     }
 
     /**
-     * Gibt die Anzahl der Elemente in der Hashtabelle zurück.
-     * @return int Anzahl der Elemente in der Hashtabelle.
-     */
-    public int size() {
-        return this.count;
-    }
-
-    /**
      * Fügt der Menge ein Element hinzu.
+     *
      * @param element Element, welches der Menge hinzugefügt werden soll.
+     *
      * @return boolean True, wenn das Element schon existiert, ansonsten False. Achtung: Dies verhält sich anders als
      * Collection.add(E e), welches True zurückgibt, wenn die Liste durch den Aufruf verändert wurde.
      */
@@ -79,7 +72,9 @@ public class MyHashSet<K> {
 
     /**
      * Löscht das angegebene Element, falls dieses existiert; dabei wird die Anzahl der Teillisten nicht verkleinert.
+     *
      * @param element Zu löschendes Element.
+     *
      * @return boolean True, wenn das Element existiert hat, ansonsten False.
      */
     public boolean delete(K element) {
@@ -92,7 +87,9 @@ public class MyHashSet<K> {
 
     /**
      * Gibt zurück, ob das Element in der Hashtabelle existiert.
+     *
      * @param element Zu suchendes Element.
+     *
      * @return boolean True, wenn die Hashtabelle das Element enthält, anderenfalls False.
      */
     public boolean contains(K element) {
@@ -101,6 +98,7 @@ public class MyHashSet<K> {
 
     /**
      * Gibt eine ArrayList mit allen Elementen der Hashtabelle zurück.
+     *
      * @return ArrayList, welche alle Elemente der Hashtabelle enthält.
      */
     public ArrayList<K> getElements() {
@@ -110,5 +108,4 @@ public class MyHashSet<K> {
         }
         return elements;
     }
-
 }

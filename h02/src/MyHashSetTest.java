@@ -17,6 +17,7 @@ public class MyHashSetTest {
 
     /**
      * Test zur Ueberpruefung der MyHashSet Klasse.
+     *
      * @param args Komandozeilenparameter, welche ignoriert werden.
      */
     public static void main(String[] args) {
@@ -36,8 +37,6 @@ public class MyHashSetTest {
         System.out.printf("  %s\n", el); // Zahlen 0..29 ausser der 5 unsortiert
         Collections.sort(el);
         System.out.printf("  %s\n", el); // 0,1,2,3,4,6,7,....,29
-
-        System.out.println(myHash.size());
     }
 
 }
