@@ -4,7 +4,7 @@
  * Hausaufgabe 03: Verkettete Listen
  * Algorithmen und Datenstrukturen, SoSe 2023
  * Aufgaben vom 03.04.2023
- * Abgabe der Lösungen am 10.04.2023
+ * Abgabe der Loesungen am 10.04.2023
  *
  * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
  * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de

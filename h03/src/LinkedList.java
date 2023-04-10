@@ -4,7 +4,7 @@
  * Hausaufgabe 03: Verkettete Listen
  * Algorithmen und Datenstrukturen, SoSe 2023
  * Aufgaben vom 03.04.2023
- * Abgabe der Lösungen am 10.04.2023
+ * Abgabe der Loesungen am 10.04.2023
  *
  * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
  * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
@@ -13,7 +13,7 @@
 public class LinkedList implements IList {
 
     /**
-     * Node Datenstruktur für Elemente der verketteten Liste.
+     * Node Datenstruktur fuer Elemente der verketteten Liste.
      */
     static class Node {
         int value;
@@ -24,14 +24,14 @@ public class LinkedList implements IList {
         }
     }
 
-    // Größe der Liste
+    // Groesse der Liste
     private int size = 0;
 
     // Beginn der Liste.
     private Node root = null;
 
     /**
-     * Hilfsfunktion um die Node an einer bestimmten Position der Liste zurückzugeben.
+     * Hilfsfunktion um die Node an einer bestimmten Position der Liste zurueckzugeben.
      * @param pos Position.
      * @return Node.
      */
@@ -47,9 +47,9 @@ public class LinkedList implements IList {
     }
 
     /**
-     * Fügt einen Wert an einer bestimmten Position ein.
+     * Fuegt einen Wert an einer bestimmten Position ein.
      * @param pos Position.
-     * @param value Einzufügender Wert.
+     * @param value Einzufuegender Wert.
      */
     @Override
     public void insertAt(int pos, int value) {
@@ -69,7 +69,7 @@ public class LinkedList implements IList {
     }
 
     /**
-     * Löscht einen Wert an einer bestimmten Position.
+     * Loescht einen Wert an einer bestimmten Position.
      * @param pos Position.
      */
     @Override
@@ -97,7 +97,7 @@ public class LinkedList implements IList {
     }
 
     /**
-     * Sucht nach einem Wert und gibt die Position zurück.
+     * Sucht nach einem Wert und gibt die Position zurueck.
      * @param value Suchwort.
      * @return Position.
      */
@@ -116,7 +116,7 @@ public class LinkedList implements IList {
     }
 
     /**
-     * Löscht alle Daten.
+     * Loescht alle Daten.
      */
     @Override
     public void clear() {
@@ -132,7 +132,7 @@ public class LinkedList implements IList {
     }
 
     /**
-     * Gibt die Anzahl der enthaltenen Elemente zurück.
+     * Gibt die Anzahl der enthaltenen Elemente zurueck.
      * @return Anzahl der Elemente.
      */
     @Override
