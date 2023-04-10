@@ -1,5 +1,20 @@
+/**
+ * LinkedList implementiert IList
+ * ==============================
+ * Hausaufgabe 03: Verkettete Listen
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 03.04.2023
+ * Abgabe der Loesungen am 10.04.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class LinkedList implements IList {
 
+    /**
+     * Node Datenstruktur fuer Elemente der verketteten Liste.
+     */
     static class Node {
         int value;
         Node next;
@@ -9,9 +24,17 @@ public class LinkedList implements IList {
         }
     }
 
+    // Groesse der Liste
     private int size = 0;
+
+    // Beginn der Liste.
     private Node root = null;
 
+    /**
+     * Hilfsfunktion um die Node an einer bestimmten Position der Liste zurueckzugeben.
+     * @param pos Position.
+     * @return Node.
+     */
     private Node getNodeAt(int pos) {
         if (pos < 0 || pos >= size) throw new ArrayIndexOutOfBoundsException("Out of bounds");
         var cur = root;
@@ -23,6 +46,11 @@ public class LinkedList implements IList {
         return cur;
     }
 
+    /**
+     * Fuegt einen Wert an einer bestimmten Position ein.
+     * @param pos Position.
+     * @param value Einzufuegender Wert.
+     */
     @Override
     public void insertAt(int pos, int value) {
         if (pos == 0) {
@@ -40,6 +68,10 @@ public class LinkedList implements IList {
         this.size++;
     }
 
+    /**
+     * Loescht einen Wert an einer bestimmten Position.
+     * @param pos Position.
+     */
     @Override
     public void removeAt(int pos) {
         if (pos >= size) throw new ArrayIndexOutOfBoundsException("Out of bounds");
@@ -53,12 +85,22 @@ public class LinkedList implements IList {
         this.size--;
     }
 
+    /**
+     * Liest einen Wert an einer bestimmten Position aus.
+     * @param pos Position.
+     * @return Wert an der Position.
+     */
     @Override
     public int getAt(int pos) {
         Node n = this.getNodeAt(pos);
         return n.value;
     }
 
+    /**
+     * Sucht nach einem Wert und gibt die Position zurueck.
+     * @param value Suchwort.
+     * @return Position.
+     */
     @Override
     public int search(int value) {
         Node cur = this.root;
@@ -73,6 +115,9 @@ public class LinkedList implements IList {
         throw new ArrayIndexOutOfBoundsException("Out of bounds");
     }
 
+    /**
+     * Loescht alle Daten.
+     */
     @Override
     public void clear() {
         if (this.size == 0) return;
@@ -86,6 +131,10 @@ public class LinkedList implements IList {
         this.size = 0;
     }
 
+    /**
+     * Gibt die Anzahl der enthaltenen Elemente zurueck.
+     * @return Anzahl der Elemente.
+     */
     @Override
     public int count() {
         return size;

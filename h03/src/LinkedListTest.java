@@ -1,5 +1,21 @@
+/**
+ * LinkedListTest testet die Funktionen der Klasse LinkedList
+ * ==========================================================
+ * Hausaufgabe 03: Verkettete Listen
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 03.04.2023
+ * Abgabe der Loesungen am 10.04.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class LinkedListTest {
 
+    /**
+     * Testet die Klasse LinkedList.
+     * @param args Komandozeilenparameter, welche ignoriert werden.
+     */
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
