@@ -8,7 +8,7 @@ Modul: [Algorithmen und Datenstrukturen](https://www.campus.fh-aachen.de/campus/
 ## Hausaufgabengruppe 03
 - [Christian Rene Thelen](mailto:christian.thelen@rwth-aachen.de)
 - [Samuel Thesing](mailto:samuel.thesing@rwth-aachen.de)
-- [Michael Conrads](mailto:)
+- [Michael Conrads](mailto:michael.conrads@rwth-aachen.de)
 
 ## Abgaberichtlinien
 
