@@ -1,6 +1,20 @@
-
+/**
+ * BinTree
+ * ==============================
+ * Hausaufgabe 04: Binaerer Suchbaum
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 10.04.2023
+ * Abgabe der Loesungen am 16.04.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class BinTree {
 
+    /**
+     * Node Datenstruktur fuer Elemente des binaeren Suchbaums.
+    */
     private static class Node {
 
         public int data;
@@ -13,8 +27,14 @@ public class BinTree {
 
     }
 
+    /**Wurzel-Knoten*/
     private Node root = null;
 
+    /**
+     * Hilfsfunktion um die Node mit einem bestimmten Wert zu finden.
+     * @param x Wert.
+     * @return Node.
+     */
     private Node getNode(int x) {
         Node cur = this.root;
         while (cur != null && cur.data != x) {
@@ -27,6 +47,11 @@ public class BinTree {
         return cur;
     }
 
+    /**
+     * Hilfsfunktion um die Parent-Node der Node mit einem bestimmten Wert zu finden. Wird eigentlich nicht benoetigt.
+     * @param x Wert.
+     * @return Node.
+     */
     private Node getParentNode(int x) {
         if (this.root == null) {
             return null;
@@ -48,6 +73,10 @@ public class BinTree {
         return null;
     }
 
+    /**
+     * Fuegt einen Wert ein.
+     * @param x Einzufuegender Wert.
+     */
     public void insert(int x) {
         if (this.root == null) {
             this.root = new Node(x);
@@ -73,10 +102,17 @@ public class BinTree {
         throw new ArithmeticException("Value already exists");
     }
 
+    /**
+     * Loescht alle Daten.
+     */
     public void clear() {
         this.root = null;
     }
 
+    /**
+     * Loescht einen bestimmten Wert.
+     * @param x Zu loeschender Wert.
+     */
     public void remove(int x) {
         if (this.root == null) {
             throw new ArithmeticException("Value does not exist");
@@ -125,14 +161,19 @@ public class BinTree {
         } else {
             p.right = nextBigger;
         }
-        nextBigger.left = n.left;
 
+        //connect
+        nextBigger.left = n.left;
         if (n.right != nextBigger) {
             nextBiggerParent.left = nextBigger.right;
             nextBigger.right = n.right;
         }
     }
 
+    /**
+     * Gibt den Baum in einer einfachen Textdarstellung aus. (Nicht gefordert, aber gut fuers Debuggen)
+     * @param n Wurzelkonten des Baums
+     */
     public static void printTree(Node n) {
         if (n == null) {
             System.out.println("Tree is empty");
@@ -143,6 +184,12 @@ public class BinTree {
         if (n.right != null) printTree(n.right, 1, false);
     }
 
+    /**
+     * Hilfsfunktion fuer die Ausgabe eine Baums
+     * @param n Knoten
+     * @param depth Tiefe des Knoten
+     * @param left linkes oder rechtes Kind des Parent-Knoten
+     */
     private static void printTree(Node n, int depth, boolean left) {
         for (int i = 0; i < depth; i++) {
             System.out.print('\t');
@@ -153,6 +200,10 @@ public class BinTree {
         if (n.right != null) printTree(n.right, depth+1, false);
     }
 
+    /**
+     * Vorgegebene Testfunktion, die laengst nicht alle wichtigen Faelle betrachtet,
+     * bei anderen Daten eine Exception werfen wuerde und einige Funktionen gar nicht testet.
+     */
     public static void main(String[] args) {
         BinTree tree = new BinTree();
         tree.insert(20);
