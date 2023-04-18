@@ -15,49 +15,66 @@ import java.util.Collections;
  */
 public class Heap {
     /* Definition
-        Ein Heap ist ein Binärbaum mit folgenden Eigenschaften:
+        Eine Heap ist ein Binärbaum mit folgenden Eigenschaften:
           - Er ist links-vollständig
           - Die Kinder eines Knotens sind höchstens so groß wie der Knoten selbst.
      */
 
+    // Einbettung der Heap als Liste wie in den Folien beschrieben
     private ArrayList<Integer> data = new ArrayList<>();
 
-    // gibt true zurück, falls der Heap leer ist ansonsten false.
+    /**
+     * Überprüft, ob der Heap leer ist.
+     * @return gibt true zurück, falls der Heap leer ist ansonsten false.
+     */
     public boolean isEmpty() {
         return ! (data.size() > 1);
     }
 
+    /**
+     * Initialisiert den Heap.
+     */
     public Heap() {
         // Dummy-Element
         data.add(null);
     }
 
-    // fügt den Wert i zum Heap hinzu.
+    /**
+     * Fügt einen Wert zum Heap hinzu.
+     * @param i der zum Heap hinzugefügt wird.
+     */
     public void add(int i) {
         // Level-Order-Reihenfolge
         data.add(i);
         upHeap();
     }
 
-    // entfernt das größte Element vom Heap und gibt es zurück
+    /**
+     * Entfernt das größte Element (Wurzelelement) vom Heap, gibt es zurück und stellt die Ordnung wieder her.
+     * @return Größtes Element, welches vom Heap entfernt wurde.
+     */
     public int getMax() {
         // das größte Element ist definitionsgemäß an der Wurzel
         int max = data.get(1);
 
-        // Wenn der Heap dadurch noch nicht leer wird
+        // Wenn der Heap aus mehr als nur einem Knoten besteht...
         if (data.size() - 1 > 1) {
-            // setze den weitesten rechtsstehenden Blattknoten aus der untersten Ebene als neue Wurzel
+            // ... setze den, am weitesten rechtsstehenden Blattknoten aus der untersten Ebene als neue Wurzel ...
             data.set(1, data.remove(data.size() - 1));
+            // ... und ordne den Heap neu.
+            downHeap();
         } else {
-            // ansonsten entferne ihn einfach.
+            // ... ansonsten entferne den letzten Knoten.
             data.remove(data.size() -1);
         }
 
-        downHeap();
         return max;
     }
 
-    // gibt das Feld (den Heap) in Stringdarstellung zurück
+    /**
+     * Gibt die Feldeinbettung von dem Heap in Stringdarstellung zurück.
+     * @return Stringdarstellung der Einbettung des Heaps.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 1; i < data.size(); i++) {
@@ -69,6 +86,9 @@ public class Heap {
         return sb.toString();
     }
 
+    /**
+     * upHeap stellt die Ordnung des Heaps durch Vertauschung von unten nach oben wieder her.
+     */
     private void upHeap() {
         int pos = data.size() - 1;
         while (pos > 1 && data.get(pos) > data.get(pos/2)) {
@@ -76,6 +96,10 @@ public class Heap {
             pos = pos / 2;
         }
     }
+
+    /**
+     * downHeap stellt die Ordnung des Heaps durch Vertauschung von oben nach unten wieder her.
+     */
     private void downHeap() {
         int pos = 1;
         while (pos*2 < data.size()) {
