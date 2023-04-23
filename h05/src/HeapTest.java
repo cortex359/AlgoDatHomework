@@ -13,7 +13,7 @@
 public class HeapTest {
 
     /**
-     * Führt den Test der Klasse Heap mit Beispieldaten aus.
+     * Fuehrt den Test der Klasse Heap mit Beispieldaten aus.
      * @param args Kommandozeilenparameter, welche ignoriert werden.
      */
     public static void main(String[] args) {
@@ -28,12 +28,12 @@ public class HeapTest {
     }
 
     /**
-     * Testet die Funktionen der Heap Klasse durch Hinzufügen und Entfernen der Elemente einer übergebenen Liste.
+     * Testet die Funktionen der Heap Klasse durch Hinzufuegen und Entfernen der Elemente einer uebergebenen Liste.
      * @param heap Heap Objekt der zu testenden Klasse.
-     * @param test int[] Array mit Zahlen, die in ihrer Reihenfolge hinzugefügt werden sollen.
+     * @param test int[] Array mit Zahlen, die in ihrer Reihenfolge hinzugefuegt werden sollen.
      */
     private static void testHeap(Heap heap, int[] test) {
-        StringBuilder sb = new StringBuilder("Füge die Elemente\n    [");
+        StringBuilder sb = new StringBuilder("Fuege die Elemente\n    [");
 
         for (int i = 0; i < test.length; i++) {
             sb.append(test[i]);
@@ -46,10 +46,10 @@ public class HeapTest {
         System.out.printf("Heap: %s\n", heap.toString());
         for (int t : test) {
             heap.add(t);
-            System.out.printf("%3d hinzugefügt: %s\n", t, heap.toString());
+            System.out.printf("%3d hinzugefuegt: %s\n", t, heap.toString());
         }
 
-        System.out.println("\nEntnehme jeweils das größtes Element aus dem Heap...");
+        System.out.println("\nEntnehme jeweils das groesstes Element aus dem Heap...");
         while (!heap.isEmpty()) {
             System.out.printf("%3d entnommen: ", heap.getMax());
             System.out.printf("%s\n", heap.toString());

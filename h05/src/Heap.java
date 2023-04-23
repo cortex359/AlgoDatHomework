@@ -15,17 +15,17 @@ import java.util.Collections;
  */
 public class Heap {
     /* Definition
-        Eine Heap ist ein Binärbaum mit folgenden Eigenschaften:
-          - Er ist links-vollständig
-          - Die Kinder eines Knotens sind höchstens so groß wie der Knoten selbst.
+        Eine Heap ist ein Binaerbaum mit folgenden Eigenschaften:
+          - Er ist links-vollstaendig
+          - Die Kinder eines Knotens sind hoechstens so gross wie der Knoten selbst.
      */
 
     // Einbettung der Heap als Liste wie in den Folien beschrieben
     private ArrayList<Integer> data = new ArrayList<>();
 
     /**
-     * Überprüft, ob der Heap leer ist.
-     * @return gibt true zurück, falls der Heap leer ist ansonsten false.
+     * Ueberprueft, ob der Heap leer ist.
+     * @return gibt true zurueck, falls der Heap leer ist ansonsten false.
      */
     public boolean isEmpty() {
         return data.size() <= 1;
@@ -40,8 +40,8 @@ public class Heap {
     }
 
     /**
-     * Fügt einen Wert zum Heap hinzu.
-     * @param i der zum Heap hinzugefügt wird.
+     * Fuegt einen Wert zum Heap hinzu.
+     * @param i der zum Heap hinzugefuegt wird.
      */
     public void add(int i) {
         // Level-Order-Reihenfolge
@@ -50,14 +50,14 @@ public class Heap {
     }
 
     /**
-     * Entfernt das größte Element (Wurzelelement) vom Heap, gibt es zurück und stellt die Ordnung wieder her.
-     * @return Größtes Element, welches vom Heap entfernt wurde.
+     * Entfernt das groesste Element (Wurzelelement) vom Heap, gibt es zurueck und stellt die Ordnung wieder her.
+     * @return Groesstes Element, welches vom Heap entfernt wurde.
      */
     public int getMax() {
         if (this.isEmpty())
             throw new IndexOutOfBoundsException("Heap ist leer.");
 
-        // das größte Element ist definitionsgemäß an der Wurzel
+        // das groesste Element ist definitionsgemaess an der Wurzel
         int max = data.get(1);
 
         // Wenn der Heap aus mehr als nur einem Knoten besteht...
@@ -75,7 +75,7 @@ public class Heap {
     }
 
     /**
-     * Gibt die Feldeinbettung von dem Heap in Stringdarstellung zurück.
+     * Gibt die Feldeinbettung von dem Heap in Stringdarstellung zurueck.
      * @return Stringdarstellung der Einbettung des Heaps.
      */
     public String toString() {
