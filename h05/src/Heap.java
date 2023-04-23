@@ -28,7 +28,7 @@ public class Heap {
      * @return gibt true zurück, falls der Heap leer ist ansonsten false.
      */
     public boolean isEmpty() {
-        return ! (data.size() > 1);
+        return data.size() <= 1;
     }
 
     /**
@@ -54,6 +54,9 @@ public class Heap {
      * @return Größtes Element, welches vom Heap entfernt wurde.
      */
     public int getMax() {
+        if (this.isEmpty())
+            throw new IndexOutOfBoundsException("Heap ist leer.");
+
         // das größte Element ist definitionsgemäß an der Wurzel
         int max = data.get(1);
 
