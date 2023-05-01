@@ -1,12 +1,21 @@
-import com.sun.source.tree.Tree;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/** Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz:
-  * Vorlage fuer die A1 von algo-pr05 und fuer die A1 von algo-h06.
-  * Als Operationen stehen `contains' und `insert' zur Verfuegung
-  */
+/**
+ * BinarySearchTree Datenstrukturen
+ * ====================
+ * Hausaufgabe 06: BinarySearchTree Datenstrukturen
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 25.04.2023
+ * Abgabe der Loesungen am 01.05.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ *
+ */
+
+ /** Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz
+ */
 public class BinarySearchTree {
 
 	/** Die Knotenklasse als statische innere Klasse. */
@@ -50,15 +59,25 @@ public class BinarySearchTree {
 
 	/** Baumwurzel */
 	protected TreeNode root;
-
+	
+	/**
+	 * Konstruktor:<p>
+	 * Erzeugt einen zufaelligen binaeren Suchbaum mit count Knoten,
+	 * die alle zwischen den Werten min und max (einschliesslich) liegen.
+	 * @param count Anzahl Knoten, die der erzeugte Baum hat
+	 * @param min untere Grenze der Werte
+	 * @param max obere Grenze der Werte
+	 */
 	
 	public BinarySearchTree(int count, int min, int max){
-		if(count <= 0)
-			return;
-		this.root = new TreeNode((int) (Math.random()*(max-min+1)+min) );
-		root.left = new BinarySearchTree(count/2, min, root.value - 1).root;
-		root.right = new BinarySearchTree(count/2-1, root.value + 1, max).root;
+		for(int i = 0; i < count; i++){
+			int x = (int)(Math.random()*(max-min+1))+min;
+			if(!this.insert(x)) {
+				i--;
+			}
+		}
 	}
+	
 	/**
 	 * Herausfinden, ob ein gewisser Datensatz schon im binaeren Suchbaum enthalten ist.
 	 *
@@ -79,7 +98,7 @@ public class BinarySearchTree {
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Einen neuen Datensatz in den binaeren Suchbaum einfuegen.
 	 *
@@ -110,46 +129,71 @@ public class BinarySearchTree {
 		}
 		return false;
 	}
-
+	/**
+	 * Gibt sowohl die Knoten in Preorder-Reihenfolge als auch die Anzahl der Knoten auf dem Bildschirm aus
+	 */
 	public void printPreOrder(){
-		ArrayList<Integer> elems = getElementsPreorder(root);
+		ArrayList<Integer> elems = new ArrayList<>();
+		getElementsPreorder(root, elems);
 		System.out.println(elems);
 		System.out.println(elems.size());
 	}
 	
-	private ArrayList<Integer> getElementsPreorder(TreeNode node){
-		ArrayList<Integer> elems = new ArrayList<>();
+	/**
+	 * private Methode, die alle Elemente des Baumes in Preorder-Reihenfolge in einer mitgegebenen ArrayList speichert.
+	 * @param node Anfangsknoten, in dem die Methode startet
+	 * @param elems mitgegebene ArrayList
+	 */
+	private void getElementsPreorder(TreeNode node, ArrayList<Integer> elems){
 		if(node == null){
-			return elems;
+			return;
 		}
 		elems.add(node.value);
 		
-		elems.addAll(getElementsPreorder(node.left));
-		elems.addAll(getElementsPreorder(node.right));
+		getElementsPreorder(node.left, elems);
+		getElementsPreorder(node.right, elems);
+	}
+	
+	/**
+	 * Gibt eine Liste der Werte aller Blattknoten zurueck
+	 */
+	public ArrayList<Integer> getLeaves(){
+		ArrayList<Integer> elems = new ArrayList<>();
+		getLeaves(root, elems);
 		return elems;
 	}
 	
-	public ArrayList<Integer> getLeaves(){
-		return getLeaves(root);
-	}
-	
-	private ArrayList<Integer> getLeaves(TreeNode node){
-		ArrayList<Integer> elems = new ArrayList<>();
+	/**
+	 * sammelt alle Blattknoten in einer mitgegebenen ArrayList
+	 * @param node Anfangsknoten, in dem die Methode startet
+	 * @param elems mitgegebene ArrayList
+	 */
+	private void getLeaves(TreeNode node, ArrayList<Integer> elems){
+		
 		if(node == null){
-			return elems;
+			return;
 		}
 		if(node.left == null && node.right == null) {
 			elems.add(node.value);
 		}
-		elems.addAll(getElementsPreorder(node.left));
-		elems.addAll(getElementsPreorder(node.right));
-		return elems;
+		getElementsPreorder(node.left, elems);
+		getElementsPreorder(node.right, elems);
 	}
 	
+	/**
+	 * Gibt die groesste Summe der Knoten aus, die auf einem Pfad
+	 * zwischen der Wurzel und einem Blatt erreicht werden kann.
+	 */
 	public int getMaxPathSum(){
 		return getMaxPathSum(root);
 	}
 	
+	/**
+	 * Berechnet die groesste Summe der Knoten, die auf einem Pfad
+	 * zwischen der Wurzel und einem Blatt erreicht werden kann.
+	 * @param node Anfangsknoten, in dem die Methode startet
+	 * @return die groesste Summe
+	 */
 	private int getMaxPathSum(TreeNode node){
 		if(node == null){
 			return 0;
@@ -157,26 +201,49 @@ public class BinarySearchTree {
 		return node.value + Math.max(getMaxPathSum(node.left), getMaxPathSum(node.right));
 	}
 	
-	public ArrayList<Integer> getElementsInLevel(int level){
-		return getElementsInLevel(root, level);
-	}
+	/**
+	 * Gibt eine Liste der Werte aller Knoten zurueck,
+	 * die im uebergebenen Level liegen. Die Wurzel hat Level 0.
+	 * @param level entsprechendes Level, aus dem die Werte entnommen werden
+	 * @return eine Liste mit den Werten aller Knoten des uebergebenen Levels
+	 */
 	
-	private ArrayList<Integer> getElementsInLevel(TreeNode node, int remainingDepth){
+	public ArrayList<Integer> getElementsInLevel(int level){
 		ArrayList<Integer> elems = new ArrayList<>();
-		if(node == null)
-			return elems;
-		if(remainingDepth == 0) {
-			elems.add(node.value);
-			return elems;
-		}
-		elems.addAll(getElementsInLevel(node.left, remainingDepth-1));
-		elems.addAll(getElementsInLevel(node.right, remainingDepth-1));
+		getElementsInLevel(root, level, elems);
 		return elems;
 	}
 	
+	/**
+	 * sammelt dann alle Werte aus den Knoten des uebergebenen Levels in einer uebergebenen Liste.
+	 * @param node Anfangsknoten, in dem die Methode startet
+	 * @param remainingDepth uebergebene Tiefe, gleich dem Level, aus dem die Werte genommen werden.
+	 * @param elems uebergebene ArrayList
+	 */
+	private void getElementsInLevel(TreeNode node, int remainingDepth, ArrayList<Integer> elems){
+		if(node == null)
+			return;
+		if(remainingDepth == 0) {
+			elems.add(node.value);
+			return;
+		}
+		getElementsInLevel(node.left, remainingDepth-1, elems);
+		getElementsInLevel(node.right, remainingDepth-1, elems);
+	}
+	
+	/**
+	 * Ueberprueft, ob der Baum vollstaendig ist oder nicht
+	 * @return true - wenn Baum vollstaendig<p> false - wenn Baum nicht vollstaendig.
+	 */
 	public boolean isComplete(){
 		return isComplete(root);
 	}
+	
+	/**
+	 * Ueberprueft, ob der Baum vollstaendig ist oder nicht
+	 * @param node Anfangsknoten, in dem die Methode startet
+	 * @return true - wenn Baum vollstaendig<p> false - wenn Baum nicht vollstaendig.
+	 */
 	
 	private boolean isComplete(TreeNode node){
 		if(node == null){
@@ -187,13 +254,30 @@ public class BinarySearchTree {
 		
 		return isComplete(node.left) && isComplete(node.right);
 	}
-	
+
+	/**
+	 * Gibt zurueck, ob der Baum die AVL-Bedingung erfuellt
+	 * @return true - wenn Baum AVL konform<p></p> false - wenn Baum nicht AVL konform
+	 */
 	public boolean isAVL(){
-		return isAVL(root);
+		return isAVL(root, 0) != -1;
 	}
 	
-	private boolean isAVL(TreeNode node){
-		return true;
+	/**
+	 * prueft, ob zwischen dem linken und dem rechten Teilbaum der Betrag der Tiefendifferenz groesser 1 ist.
+	 * @param node Anfangsknoten, in dem die Methode startet
+	 * @param depth Tiefe des Teilbaums
+	 * @return depth, wenn node null
+	 * <p> -1, wenn die Tiefendifferenz zweier benachbarter Teilbaeume groesser 1 ist
+	 * </p> 0, wenn alles AVL-konform ist
+	 */
+	private int isAVL(TreeNode node, int depth){
+		if(node == null)
+			return depth;
+		depth++;
+		if(isAVL(node.left, depth) == -1 || isAVL(node.right, depth) == -1 || Math.abs(isAVL(node.left, depth) - isAVL(node.right, depth)) > 1)
+			return -1;
+		return 0;
 	}
 }
 
