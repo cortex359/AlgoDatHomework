@@ -66,9 +66,12 @@ public class BinarySearchTree {
      * @param count Anzahl Knoten, die der erzeugte Baum hat
      * @param min untere Grenze der Werte
      * @param max obere Grenze der Werte
+     * @throws IllegalArgumentException wenn max kleiner als min ist oder count groesser als der Bereich, der von min und max eingeschlossen wird
      */
     
     public BinarySearchTree(int count, int min, int max) {
+        if(max < min || max - min < count)
+            throw new IllegalArgumentException("Der Bereich muss groesser als 0 und mindestens so groß wie die Anzahl der hinzuzufuegenden Elemente sein");
         for (int i = 0; i < count; i++) {
             int x = (int) (Math.random() * (max - min + 1)) + min;
             if (!this.insert(x)) {
@@ -130,17 +133,16 @@ public class BinarySearchTree {
     }
     
     /**
-     * Gibt sowohl die Knoten in Preorder-Reihenfolge als auch die Anzahl der Knoten auf dem Bildschirm aus
+     * Gibt sowohl die Knoten in Preorder-Reihenfolge auf dem Bildschirm aus
      */
     public void printPreOrder() {
         ArrayList<Integer> elems = new ArrayList<>();
         getElementsPreorder(root, elems);
         System.out.println(elems);
-        System.out.println(elems.size());
     }
     
     /**
-     * private Methode, die alle Elemente des Baumes in Preorder-Reihenfolge in einer mitgegebenen ArrayList speichert.
+     * Speichert alle Elemente des Baumes in Preorder-Reihenfolge in einer mitgegebenen ArrayList
      * @param node Anfangsknoten, in dem die Methode startet
      * @param elems mitgegebene ArrayList
      */
@@ -206,9 +208,12 @@ public class BinarySearchTree {
      * die im uebergebenen Level liegen. Die Wurzel hat Level 0.
      * @param level entsprechendes Level, aus dem die Werte entnommen werden
      * @return eine Liste mit den Werten aller Knoten des uebergebenen Levels
+     * @throws IllegalArgumentException wenn level kleiner 0 ist
      */
     
     public ArrayList<Integer> getElementsInLevel(int level) {
+        if(level < 0)
+            throw new IllegalArgumentException("Level muss mindestens 0 sein.");
         ArrayList<Integer> elems = new ArrayList<>();
         getElementsInLevel(root, level, elems);
         return elems;
