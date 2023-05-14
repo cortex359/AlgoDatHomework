@@ -173,6 +173,12 @@ public class Schachbrett {
 
             if (this.solutions.size() > showMax && first)
                 System.out.println("...");
+
+            // Gebe Visualisierung der ersten/letzten Loesung aus
+            if (first)
+                visulizeSolution(0);
+            else
+                visulizeSolution(this.solutions.size() - 1);
         }
     }
 
