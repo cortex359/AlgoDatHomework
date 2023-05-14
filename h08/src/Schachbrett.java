@@ -1,7 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Schachbrett sucht Loesungen fuer das Damen Problem
@@ -18,18 +15,17 @@ import java.util.stream.IntStream;
 public class Schachbrett {
     // solutions enthaelt eine Liste aller Loesungen in Form von ArrayListen, welche spaltenweise die Zeilennummer angeben,
     //           in der sich die Dame befindet.
-    private ArrayList<ArrayList<Integer>> solutions;
+    private final ArrayList<ArrayList<Integer>> solutions;
 
     // size speichert die Groesse des n x n Schachbretts an
     private final int size;
 
     // SHOW_COORDINATES legt fest, ob bei der Visualisierung die Koordinaten des Schachbetts angezeigt werfen.
     //                  (funktioniert nur fuer n <= 26)
-    private final boolean SHOW_COORDINATES = true;
+    boolean SHOW_COORDINATES = true;
 
-    // MAX_SHOW_SOLUTIONS begrenzt die Anzahl der aufzulistenden Loesungen. Um sich alle 365.596 Loesungen eines 14x14
-    //                    Schachbretts anzeigen zu lassen, kann dieser wert auf 365596 erhoeht werden.
-    private final int MAX_SHOW_SOLUTIONS = 4;
+    // MAX_SHOW_SOLUTIONS begrenzt die Anzahl der aufzulistenden Loesungen in der printSolutionOverview-Methode.
+    int MAX_SHOW_SOLUTIONS = 4;
 
     /**
      * Erzeugt ein neues Schachbrett und legt die Liste fuer moegliche Loesungen des Damenproblems an.
@@ -37,7 +33,7 @@ public class Schachbrett {
      */
     public Schachbrett(int n) {
         this.size = n;
-        this.solutions = new ArrayList<ArrayList<Integer>>();
+        this.solutions = new ArrayList<>();
     }
 
     /**
@@ -68,7 +64,7 @@ public class Schachbrett {
         // Loesungen fuer alle moeglichen Damen in Pre-Order erkunden:
         for (int row = 1; row <= this.size; row++) {
             if (isPosValid(row, partialSolution)) {
-                ArrayList<Integer> newPartialSolution = (ArrayList<Integer>) partialSolution.clone();
+                ArrayList<Integer> newPartialSolution = new ArrayList<>(partialSolution);
                 newPartialSolution.add(row);
                 addQueen(newPartialSolution);
             }
@@ -80,7 +76,7 @@ public class Schachbrett {
      * (partialSolution) eine Dame platziert werden kann.
      * @param row Nummer der Zeile, die Geprueft werden soll. Beginnend ab 1.
      * @param partialSolution Spaltenweise Liste der Zeilen, in denen bereits eine Dame gesetzt wurde.
-     * @return True, wenn eine Dame plaziert werden kann. False, wenn die Dame geschlagen werden wuerde.
+     * @return True, wenn eine Dame platziert werden kann. False, wenn die Dame geschlagen werden wuerde.
      */
     private boolean isPosValid(int row, ArrayList<Integer> partialSolution) {
         // Spalten muessen nicht geprueft werden, da die Loesung spaltenweise aufgebaut wird.
@@ -98,6 +94,12 @@ public class Schachbrett {
         }
 
         return true;
+    }
+
+    public void printAll() {
+        for (int i=0; i < this.solutions.size(); i++) {
+            System.out.printf("Loesung %d/%d: \u265B in den Zeilen %s\n", i+1, this.solutions.size(), this.solutions.get(i));
+        }
     }
 
     /**
@@ -125,17 +127,17 @@ public class Schachbrett {
                 System.out.printf("[%c]", (i == rowWithQueen) ? '\u265B' : ' ');
             }
 
-            System.out.printf("\n");
+            System.out.print("\n");
         }
 
         if (SHOW_COORDINATES && this.size <= 26) {
-            System.out.printf("   ");
+            System.out.print("   ");
             for (int i = 0; i < this.size; i++) {
                 System.out.printf(" %c ", (char) i + 65);
             }
         }
 
-        System.out.printf("\n");
+        System.out.print("\n");
     }
 
     /**
@@ -154,9 +156,9 @@ public class Schachbrett {
     }
 
     /**
-     * Gibt die ersten 8 Loesungen aus.
+     * Gibt die ersten/letzten MAX_SHOW_SOLUTIONS Loesungen aus.
      */
-    public void printSolutions(boolean first) {
+    public void printSolutionOverview(boolean first) {
         if (this.solutions.size() == 0) {
             System.out.println("Es wurden keine Loesungen gefunden.");
             return;
