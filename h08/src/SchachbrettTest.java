@@ -11,13 +11,29 @@
  * @author Michael Conrads, michael.conrads@rwth-aachen.de
  */
 public class SchachbrettTest {
+
+    /**
+     * Testet das Damenproblem für Schachbretter bestimmter Größen.
+     * @param args
+     */
     public static void main(String[] args) {
-        damenProblem(3);
+        damenProblem(6);
+        damenProblem(8);
+        damenProblem(14);
     }
 
+    /**
+     * Lösung der Aufgabe 1: Bestimmt die Lösungen des Damen-Problems zu einem Schachbrett mit übergebener Größe mit
+     * Backtracking und gib diese aus.
+     * @param brettgroesse
+     */
     public static void damenProblem(int brettgroesse) {
         Schachbrett sb = new Schachbrett(brettgroesse);
-        sb.platziereDamen();
-        //sb.visulizeSolution(0);
+        sb.placeQueens();
+        if (brettgroesse < 10) {
+            sb.printSolutions(true);
+        } else {
+            sb.printSolutions(false);
+        }
     }
 }
