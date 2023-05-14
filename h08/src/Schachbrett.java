@@ -27,6 +27,10 @@ public class Schachbrett {
     //                  (funktioniert nur fuer n <= 26)
     private final boolean SHOW_COORDINATES = true;
 
+    // MAX_SHOW_SOLUTIONS begrenzt die Anzahl der aufzulistenden Loesungen. Um sich alle 365.596 Loesungen eines 14x14
+    //                    Schachbretts anzeigen zu lassen, kann dieser wert auf 365596 erhoeht werden.
+    private final int MAX_SHOW_SOLUTIONS = 4;
+
     /**
      * Erzeugt ein neues Schachbrett und legt die Liste fuer moegliche Loesungen des Damenproblems an.
      * @param n Groesse des quadratischen Schachbretts.
@@ -59,14 +63,14 @@ public class Schachbrett {
         if (partialSolution.size() == this.size) {
             // Neue Loesung der Liste der Loesungen hinzufuegen.
             this.solutions.add(partialSolution);
-        } else {
-            // Loesungen fuer alle moeglichen Damen in Pre-Order erkunden:
-            for (int row = 1; row <= this.size; row++) {
-                if (isPosValid(row, partialSolution)) {
-                    ArrayList<Integer> newPartialSolution = (ArrayList<Integer>) partialSolution.clone();
-                    newPartialSolution.add(row);
-                    addQueen(newPartialSolution);
-                }
+            return;
+        }
+        // Loesungen fuer alle moeglichen Damen in Pre-Order erkunden:
+        for (int row = 1; row <= this.size; row++) {
+            if (isPosValid(row, partialSolution)) {
+                ArrayList<Integer> newPartialSolution = (ArrayList<Integer>) partialSolution.clone();
+                newPartialSolution.add(row);
+                addQueen(newPartialSolution);
             }
         }
     }
@@ -153,33 +157,32 @@ public class Schachbrett {
      * Gibt die ersten 8 Loesungen aus.
      */
     public void printSolutions(boolean first) {
-        int showMax = 4;
-
         if (this.solutions.size() == 0) {
             System.out.println("Es wurden keine Loesungen gefunden.");
-        } else {
-            System.out.printf("\nFuer ein Schachbrett der Groesse %dx%d wurden %d Loesungen des Damenproblems gefunden.\n",
-                    this.size, this.size, this.solutions.size());
-
-            if (this.solutions.size() > showMax)
-                System.out.printf("Es werden die %s %d Loesungen angezeigt:\n", first? "ersten" : "letzten", showMax);
-
-            if (this.solutions.size() > showMax && !first)
-                System.out.println("...");
-
-            for (int i = first? 0 : this.solutions.size()-showMax; i < this.solutions.size() && (!first || i < showMax); i++) {
-                printSolution(i);
-            }
-
-            if (this.solutions.size() > showMax && first)
-                System.out.println("...");
-
-            // Gebe Visualisierung der ersten/letzten Loesung aus
-            if (first)
-                visulizeSolution(0);
-            else
-                visulizeSolution(this.solutions.size() - 1);
+            return;
         }
+
+        System.out.printf("\nFuer ein Schachbrett der Groesse %dx%d wurden %d Loesungen des Damenproblems gefunden.\n",
+                this.size, this.size, this.solutions.size());
+
+        if (this.solutions.size() > MAX_SHOW_SOLUTIONS)
+            System.out.printf("Es werden die %s %d Loesungen angezeigt:\n", first? "ersten" : "letzten", MAX_SHOW_SOLUTIONS);
+
+        if (this.solutions.size() > MAX_SHOW_SOLUTIONS && !first)
+            System.out.println("...");
+
+        for (int i = first? 0 : this.solutions.size()-MAX_SHOW_SOLUTIONS; i < this.solutions.size() && (!first || i < MAX_SHOW_SOLUTIONS); i++) {
+            printSolution(i);
+        }
+
+        if (this.solutions.size() > MAX_SHOW_SOLUTIONS && first)
+            System.out.println("...");
+
+        // Gebe Visualisierung der ersten/letzten Loesung aus
+        if (first)
+            visulizeSolution(0);
+        else
+            visulizeSolution(this.solutions.size() - 1);
     }
 
 }
