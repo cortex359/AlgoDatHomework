@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Schachbrett sucht Lösungen für das Damen Problem
+ * Schachbrett sucht Loesungen fuer das Damen Problem
  * ================================================
  * Hausaufgabe 08: Backtracking / Tiefensuche
  * Algorithmen und Datenstrukturen, SoSe 2023
@@ -16,20 +16,20 @@ import java.util.stream.IntStream;
  * @author Michael Conrads, michael.conrads@rwth-aachen.de
  */
 public class Schachbrett {
-    // solutions enthält eine Liste aller Lösungen in Form von ArrayListen, welche spaltenweise die Zeilennummer angeben,
+    // solutions enthaelt eine Liste aller Loesungen in Form von ArrayListen, welche spaltenweise die Zeilennummer angeben,
     //           in der sich die Dame befindet.
     private ArrayList<ArrayList<Integer>> solutions;
 
-    // size speichert die Größe des n x n Schachbretts an
+    // size speichert die Groesse des n x n Schachbretts an
     private final int size;
 
     // SHOW_COORDINATES legt fest, ob bei der Visualisierung die Koordinaten des Schachbetts angezeigt werfen.
-    //                  (funktioniert nur für n <= 26)
+    //                  (funktioniert nur fuer n <= 26)
     private final boolean SHOW_COORDINATES = true;
 
     /**
-     * Erzeugt ein neues Schachbrett und legt die Liste für mögliche Lösungen des Damenproblems an.
-     * @param n Größe des quadratischen Schachbretts.
+     * Erzeugt ein neues Schachbrett und legt die Liste fuer moegliche Loesungen des Damenproblems an.
+     * @param n Groesse des quadratischen Schachbretts.
      */
     public Schachbrett(int n) {
         this.size = n;
@@ -37,14 +37,14 @@ public class Schachbrett {
     }
 
     /**
-     * Erzeugt ein Schachbrett mit der Standardgröße 8 x 8.
+     * Erzeugt ein Schachbrett mit der Standardgroesse 8 x 8.
      */
     public Schachbrett() {
         this(8);
     }
 
     /**
-     * Errechnet alle Lösungen des Damen-Problems für das Schachbrett
+     * Errechnet alle Loesungen des Damen-Problems fuer das Schachbrett
      */
     public void placeQueens() {
         ArrayList<Integer> partialSolution = new ArrayList<>();
@@ -52,15 +52,15 @@ public class Schachbrett {
     }
 
     /**
-     * Rekursive Funktion, welche einer übergebenen Teillösung weitere Spalten hinzufügt.
+     * Rekursive Funktion, welche einer uebergebenen Teilloesung weitere Spalten hinzufuegt.
      * @param partialSolution Liste der bereits platzierten Damen in den vorangegangenen Spalten.
      */
     public void addQueen(ArrayList<Integer> partialSolution) {
         if (partialSolution.size() == this.size) {
-            // Neue Lösung der Liste der Lösungen hinzufügen.
+            // Neue Loesung der Liste der Loesungen hinzufuegen.
             this.solutions.add(partialSolution);
         } else {
-            // Lösungen für alle möglichen Damen in Pre-Order erkunden:
+            // Loesungen fuer alle moeglichen Damen in Pre-Order erkunden:
             for (int row = 1; row <= this.size; row++) {
                 if (isPosValid(row, partialSolution)) {
                     ArrayList<Integer> newPartialSolution = (ArrayList<Integer>) partialSolution.clone();
@@ -72,21 +72,21 @@ public class Schachbrett {
     }
 
     /**
-     * isPosValid prüft, ob in einer übergebenen Zeile (row) der nächsten Spalte einer übergebenen Lösung
+     * isPosValid prueft, ob in einer uebergebenen Zeile (row) der naechsten Spalte einer uebergebenen Loesung
      * (partialSolution) eine Dame platziert werden kann.
-     * @param row Nummer der Zeile, die Geprüft werden soll. Beginnend ab 1.
+     * @param row Nummer der Zeile, die Geprueft werden soll. Beginnend ab 1.
      * @param partialSolution Spaltenweise Liste der Zeilen, in denen bereits eine Dame gesetzt wurde.
-     * @return True, wenn eine Dame plaziert werden kann. False, wenn die Dame geschlagen werden würde.
+     * @return True, wenn eine Dame plaziert werden kann. False, wenn die Dame geschlagen werden wuerde.
      */
     private boolean isPosValid(int row, ArrayList<Integer> partialSolution) {
-        // Spalten müssen nicht geprüft werden, da die Lösung spaltenweise aufgebaut wird.
+        // Spalten muessen nicht geprueft werden, da die Loesung spaltenweise aufgebaut wird.
         int col = partialSolution.size() + 1;
 
-        // Prüfe Zeilen:
+        // Pruefe Zeilen:
         if (partialSolution.contains(row))
             return false;
 
-        // Prüfe Diagonale:
+        // Pruefe Diagonale:
         for (int i = 1; i <= partialSolution.size(); i++) {
             int j = partialSolution.get(i - 1);
             if (Math.abs(col - i) == Math.abs(row - j))
@@ -97,16 +97,16 @@ public class Schachbrett {
     }
 
     /**
-     * Visualisiert eine der gefundenen Lösungen des Damenproblems auf einem Schachbrett.
-     * @param solutionIndex Index der gefundenen Lösung beginnend ab 0.
+     * Visualisiert eine der gefundenen Loesungen des Damenproblems auf einem Schachbrett.
+     * @param solutionIndex Index der gefundenen Loesung beginnend ab 0.
      */
     public void visulizeSolution(int solutionIndex) {
-        System.out.printf("\nVisualisierung der Lösung %d/%d\n", solutionIndex + 1, this.solutions.size());
+        System.out.printf("\nVisualisierung der Loesung %d/%d\n", solutionIndex + 1, this.solutions.size());
 
-        // Zeilenausgabe prüft auch IndexInBounds
+        // Zeilenausgabe prueft auch IndexInBounds
         printSolution(solutionIndex);
 
-        // Lade Lösung
+        // Lade Loesung
         ArrayList<Integer> solution = this.solutions.get(solutionIndex);
 
         // (i,j) -> (Zeile, Spalte)
@@ -117,7 +117,7 @@ public class Schachbrett {
             // Zeilennummerierung beginnt bei 1
             for (int j = 0; j < this.size; j++) {
                 int rowWithQueen = solution.get(j) - 1;
-                // u2655 weiße Dame, u265B schwarze Dame
+                // u2655 weisse Dame, u265B schwarze Dame
                 System.out.printf("[%c]", (i == rowWithQueen) ? '\u265B' : ' ');
             }
 
@@ -135,14 +135,14 @@ public class Schachbrett {
     }
 
     /**
-     * Gibt eine Lösung als Zeilennummer der Dame in Reihenfolge der Spalten aus.
-     * @param solutionIndex Index der gefundenen Lösung beginnend ab 0.
+     * Gibt eine Loesung als Zeilennummer der Dame in Reihenfolge der Spalten aus.
+     * @param solutionIndex Index der gefundenen Loesung beginnend ab 0.
      */
     public void printSolution(int solutionIndex) {
         if (solutionIndex >= this.solutions.size())
-            throw new IndexOutOfBoundsException("Es sind bislang nur " + this.solutions.size() + " Lösungen gefunden worden.");
+            throw new IndexOutOfBoundsException("Es sind bislang nur " + this.solutions.size() + " Loesungen gefunden worden.");
         if (solutionIndex < 0)
-            throw new IndexOutOfBoundsException("Der Index der Lösung muss positiv sein.");
+            throw new IndexOutOfBoundsException("Der Index der Loesung muss positiv sein.");
 
         ArrayList<Integer> solution = this.solutions.get(solutionIndex);
 
@@ -150,19 +150,19 @@ public class Schachbrett {
     }
 
     /**
-     * Gibt die ersten 8 Lösungen aus.
+     * Gibt die ersten 8 Loesungen aus.
      */
     public void printSolutions(boolean first) {
         int showMax = 4;
 
         if (this.solutions.size() == 0) {
-            System.out.println("Es wurden keine Lösungen gefunden.");
+            System.out.println("Es wurden keine Loesungen gefunden.");
         } else {
-            System.out.printf("\nFür ein Schachbrett der Größe %dx%d wurden %d Lösungen des Damenproblems gefunden.\n",
+            System.out.printf("\nFuer ein Schachbrett der Groesse %dx%d wurden %d Loesungen des Damenproblems gefunden.\n",
                     this.size, this.size, this.solutions.size());
 
             if (this.solutions.size() > showMax)
-                System.out.printf("Es werden die %s %d Lösungen angezeigt:\n", first? "ersten" : "letzten", showMax);
+                System.out.printf("Es werden die %s %d Loesungen angezeigt:\n", first? "ersten" : "letzten", showMax);
 
             if (this.solutions.size() > showMax && !first)
                 System.out.println("...");

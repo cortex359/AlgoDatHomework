@@ -13,7 +13,7 @@
 public class SchachbrettTest {
 
     /**
-     * Testet das Damenproblem für Schachbretter bestimmter Größen.
+     * Testet das Damenproblem fuer Schachbretter bestimmter Groessen.
      * @param args
      */
     public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class SchachbrettTest {
     }
 
     /**
-     * Lösung der Aufgabe 1: Bestimmt die Lösungen des Damen-Problems zu einem Schachbrett mit übergebener Größe mit
+     * Loesung der Aufgabe 1: Bestimmt die Loesungen des Damen-Problems zu einem Schachbrett mit uebergebener Groesse mit
      * Backtracking und gib diese aus.
      * @param brettgroesse
      */
