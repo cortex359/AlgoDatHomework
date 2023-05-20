@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class WeightsTree {
     /**
      * Innere Klasse Node des WeightsTree
@@ -37,7 +39,7 @@ public class WeightsTree {
         }
     }
     
-    private Node root;
+    private static Node root;
     
     /**
      * Konstruktor von WeightsTree, baut direkt den Baum mit allen möglichen Gewichtsverteilungen
@@ -47,7 +49,7 @@ public class WeightsTree {
     }
     
     private void constructTree(int[] weights){
-        this.root = new Node(0);
+        root = new Node(0);
         constructTree(root, 0, weights);
     }
     
@@ -63,5 +65,13 @@ public class WeightsTree {
     
     public Node getRoot(){
         return root;
+    }
+    
+    public Node[] nextNodes(Node node){
+        return node.getNextNodes();
+    }
+    
+    public static void recurse(Node node, int searchedDiff, int[] weights, ArrayList<ArrayList<Integer>> solutions){
+    
     }
 }
