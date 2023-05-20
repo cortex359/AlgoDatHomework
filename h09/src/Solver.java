@@ -1,59 +1,68 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Solver {
     
-    private static final int[] weights = {0,1, 3, 8, 20};
+    private static final int[] _weights = {1, 3, 8, 20};
+    private static final Stack<Integer> usedWeights = new Stack<>();
+    
+    private static final ArrayList<Integer> possibleSolution = new ArrayList<>();
     private static final ArrayList<ArrayList<Integer>> solutions = new ArrayList<>();
-    private static final ArrayList<Integer> currentSolution = new ArrayList<>();
     
-    public static ArrayList<ArrayList<Integer>> solveProblem(int input) {
-        if(input > Arrays.stream(weights).sum() || input < 0)
+    public static void backtracking(int input){
+        if(input > Arrays.stream(_weights).sum() || input < 0)
             System.out.println("Keine Lösung möglich");
-        backtracking(input);
-        return solutions;
+        backtracking(_weights, input, 0);
+        solutions.clear();
     }
-    
-    public static void backtracking(int searchedDiff) {
-        solveRecursive(searchedDiff, weights[1], 2);
-        if(hasValidSolution()){
-            solutions.add(new ArrayList<>(currentSolution));
-            currentSolution.clear();
+    private static void backtracking(int[] weights, int targetWeight, int currentScaleWeight) {
+        if (Math.abs(currentScaleWeight) == targetWeight) {
+            Solver.print();
         }
         
-        solveRecursive(searchedDiff, weights[0],2);
-        if(hasValidSolution()){
-            solutions.add(new ArrayList<>(currentSolution));
-            currentSolution.clear();
+        if (weights.length == 0) {
+            return;
         }
-        solveRecursive(searchedDiff, -weights[1], 2);
-        if(hasValidSolution()){
-            solutions.add(new ArrayList<>(currentSolution));
-            currentSolution.clear();
-        }
+        int[] remainingWeights = new int[weights.length - 1];
+        System.arraycopy(weights, 1, remainingWeights, 0, weights.length - 1);
+        
+        //Gewicht wird auf die linke Seite gelegt
+        usedWeights.push(weights[0]);
+        backtracking(remainingWeights, targetWeight, currentScaleWeight + weights[0]);
+        usedWeights.pop();
+        
+        //Gewicht wird auf die rechte Seite gelegt
+        usedWeights.push(-weights[0]);
+        backtracking(remainingWeights, targetWeight, currentScaleWeight - weights[0]);
+        usedWeights.pop();
+        
+        //Gewicht wird ignoriert
+        backtracking(remainingWeights, targetWeight, currentScaleWeight);
     }
     
-    public static void solveRecursive(int currentDiff, int currentWeight, int indexOfNextWeight){
-        if(currentWeight == 0){
-            solveRecursive(currentDiff, weights[indexOfNextWeight], indexOfNextWeight+1);
+    private static void print(){
+        Stack<Integer> tmp = new Stack<>();
+        while (!usedWeights.empty()){
+            possibleSolution.add(usedWeights.peek());
+            tmp.push(usedWeights.pop());
         }
-        currentDiff -= currentWeight ;
-        currentSolution.add(currentWeight);
-        if(Math.abs(currentWeight) != weights[3]){
-            if(currentDiff > 0) {
-                solveRecursive(currentDiff, weights[indexOfNextWeight], indexOfNextWeight+1);
-            } else if (currentDiff < 0) {
-                solveRecursive(currentDiff, -weights[indexOfNextWeight], indexOfNextWeight+1);
-            }
+        while (!tmp.empty())
+            usedWeights.push(tmp.pop());
+        
+        possibleSolution.sort(Comparator.comparingInt(Math::abs));
+        if(isValidSolution()) {
+            System.out.println(possibleSolution);
+            solutions.add(new ArrayList<>(possibleSolution));
         }
+        possibleSolution.clear();
     }
     
-    private static boolean hasValidSolution(){
-        if(currentSolution.isEmpty())
-            return false;
-        for(int i = 0; i < currentSolution.size()-1; i++){
-            if(currentSolution.get(i) > currentSolution.get(i+1))
+    private static boolean isValidSolution(){
+        for (ArrayList<Integer> solution : solutions) {
+            if(solution.equals(possibleSolution))
                 return false;
+            for (int i = 0; i < possibleSolution.size()-1; i++)
+                if(Math.abs(possibleSolution.get(i)) == Math.abs(possibleSolution.get(i+1)))
+                    return false;
         }
         return true;
     }
