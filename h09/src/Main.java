@@ -8,6 +8,8 @@ public class Main {
         try{
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             int articleWeight = Integer.parseInt(reader.readLine());
+            if(articleWeight == 0)
+                System.out.println("Die Waage bleibt leer.");
             ArrayList<ArrayList<Integer>> solutions = Solver.solveProblem(articleWeight);
             for (ArrayList<Integer> solution: solutions) {
                 System.out.println(solution);
