@@ -12,18 +12,18 @@ import java.util.*;
  * @author Michael Conrads, michael.conrads@rwth-aachen.de
  */
 public class Scale {
-    //weights enthält alle verfügbaren Gewichte.
+    //weights enthaelt alle verfuegbaren Gewichte.
     private static final int[] weights = {1, 3, 8, 20};
     
-    //usedWeights enthält alle bereits genutzten Gewichte innerhalb eines Rekursionsaufrufs
+    //usedWeights enthaelt alle bereits genutzten Gewichte innerhalb eines Rekursionsaufrufs
     private static final Stack<Integer> usedWeights = new Stack<>();
     
-    // solutions enthaelt Listen von aller Loesungen, welche die möglichen Gewichtskombinationen speichern.
+    // solutions enthaelt Listen von aller Loesungen, welche die moeglichen Gewichtskombinationen speichern.
     private static final Set<List<Integer>> solutions = new HashSet<>();
     
     /**
-     * ruft die Rekursionsvariante mit input von balance auf und ermittelt alle möglichen Lösungen.
-     * Dann werden die Lösungen ausgegeben
+     * ruft die Rekursionsvariante mit input von balance auf und ermittelt alle moeglichen Loesungen.
+     * Dann werden die Loesungen ausgegeben
      * @param input Gewicht des zu wiegenden Artikels
      * @return true bei korrekten input, false bei falschem input
      */
@@ -42,8 +42,8 @@ public class Scale {
     }
     
     /**
-     * sucht mithilfe von Backtracking rekursiv alle möglichen Lösungen für targetWeight.
-     * @param weightIndex nächstes Gewicht
+     * sucht mithilfe von Backtracking rekursiv alle moeglichen Loesungen fuer targetWeight.
+     * @param weightIndex naechstes Gewicht
      * @param weightDiff Differenz zum ausbalancierten Stadium
      */
     private static void balance(int weightIndex, int weightDiff) {
@@ -70,7 +70,7 @@ public class Scale {
     }
     
     /**
-     * Gibt alle Lösungen auf der Konsole aus
+     * Gibt alle Loesungen auf der Konsole aus
      */
     private static void printSolutions(){
         System.out.println("Mögliche Kombinationen sind: ");
