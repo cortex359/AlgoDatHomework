@@ -7,8 +7,7 @@ public class Main {
         try{
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             int articleWeight = Integer.parseInt(reader.readLine());
-            if(articleWeight == 0)
-                System.out.println("Die Waage bleibt leer.");
+            System.out.println("Gewicht des Artikels: " + articleWeight);
             Solver.backtracking(articleWeight);
         }
         catch (IOException e){
