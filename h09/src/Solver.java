@@ -4,22 +4,24 @@ public class Solver {
     
     private static final int[] weights = {1, 3, 8, 20};
     private static final Stack<Integer> usedWeights = new Stack<>();
-    private static final ArrayList<Integer> possibleSolution = new ArrayList<>();
-    private static final ArrayList<ArrayList<Integer>> solutions = new ArrayList<>();
+    private static final Set<List<Integer>> solutions = new HashSet<>();
     
     public static boolean backtracking(int input){
+        solutions.clear();
+        usedWeights.clear();
+
         if(input > Arrays.stream(weights).sum() || input < 0){
             System.out.println("Keine Lösung möglich");
             return false;
         }
-        
+
         backtracking(0, input, 0);
         printSolutions();
         return true;
     }
     private static void backtracking(int weightIndex, int targetWeight, int currentScaleWeight) {
         if (Math.abs(currentScaleWeight) == targetWeight) {
-            Solver.rememberSolution();
+            solutions.add(usedWeights.stream().sorted(Comparator.comparing(Math::abs)).toList());
         }
         
         if (weightIndex >= weights.length) {
@@ -39,28 +41,11 @@ public class Solver {
         //Gewicht wird ignoriert
         backtracking(weightIndex+1, targetWeight, currentScaleWeight);
     }
-    private static boolean isValidSolution(){
-        for (ArrayList<Integer> solution : solutions) {
-            if(solution.equals(possibleSolution))
-                return false;
-        }
-        return true;
-    }
-    
-    private static void rememberSolution(){
-        possibleSolution.addAll(usedWeights.stream().toList());
-        possibleSolution.sort(Comparator.comparingInt(Math::abs));
-        if(isValidSolution()) {
-            solutions.add(new ArrayList<>(possibleSolution));
-        }
-        possibleSolution.clear();
-    }
     
     private static void printSolutions(){
         System.out.println("Mögliche Kombinationen sind: ");
-        for (ArrayList<Integer> solution: solutions) {
+        for (List<Integer> solution: solutions) {
             System.out.println(solution);
         }
-        solutions.clear();
     }
 }
