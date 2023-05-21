@@ -15,9 +15,6 @@ public class Solver {
         }
         
         backtracking(0, input, 0);
-        
-        System.out.println("Mögliche Kombinationen sind: ");
-        
         printSolutions();
     }
     private static void backtracking(int weightIndex, int targetWeight, int currentScaleWeight) {
@@ -60,6 +57,7 @@ public class Solver {
     }
     
     private static void printSolutions(){
+        System.out.println("Mögliche Kombinationen sind: ");
         for (ArrayList<Integer> solution: solutions) {
             System.out.println(solution);
         }
