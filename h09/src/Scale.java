@@ -36,20 +36,19 @@ public class Scale {
             return false;
         }
 
-        balance(0, input, 0);
+        balance(0, -input);
         printSolutions();
         return true;
     }
     
     /**
-     * sucht mithilfe von Backtracking Rekursiv alle möglichen Lösungen für targetWeight.
+     * sucht mithilfe von Backtracking rekursiv alle möglichen Lösungen für targetWeight.
      * @param weightIndex nächstes Gewicht
-     * @param targetWeight gesuchtes Gewicht
-     * @param currentScaleWeight aktuelles Gewicht auf der Waage
+     * @param weightDiff Differenz zum ausbalancierten Stadium
      */
-    private static void balance(int weightIndex, int targetWeight, int currentScaleWeight) {
-        if (Math.abs(currentScaleWeight) == targetWeight) {
-            solutions.add(usedWeights.stream().sorted(Comparator.comparing(Math::abs)).toList());
+    private static void balance(int weightIndex, int weightDiff) {
+        if (0 == weightDiff) {
+            solutions.add(usedWeights.stream().sorted().toList());
         }
         
         if (weightIndex >= weights.length) {
@@ -58,16 +57,16 @@ public class Scale {
         
         //Gewicht wird auf die linke Seite gelegt
         usedWeights.push(weights[weightIndex]);
-        balance(weightIndex+1, targetWeight, currentScaleWeight + weights[weightIndex]);
+        balance(weightIndex+1, weightDiff + weights[weightIndex]);
         usedWeights.pop();
         
         //Gewicht wird auf die rechte Seite gelegt
         usedWeights.push(-weights[weightIndex]);
-        balance(weightIndex+1, targetWeight, currentScaleWeight - weights[weightIndex]);
+        balance(weightIndex+1, weightDiff - weights[weightIndex]);
         usedWeights.pop();
         
         //Gewicht wird ignoriert
-        balance(weightIndex+1, targetWeight, currentScaleWeight);
+        balance(weightIndex+1, weightDiff);
     }
     
     /**
