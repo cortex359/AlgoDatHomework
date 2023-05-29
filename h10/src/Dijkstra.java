@@ -1,10 +1,27 @@
 import java.util.*;
 import java.util.stream.IntStream;
 
+/**
+ * Dijkstra-Agorithmus
+ * ==========================================
+ * Hausaufgabe 10: Dijkstra
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 22.05.2023
+ * Abgabe der Loesungen am 29.05.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class Dijkstra {
 
     private record Kante(int zielKnoten, int gewicht) {}
 
+    /**
+     * Wandelt eine Kantenliste in eine Adjazenzliste um
+     * @param kantenListe die umzuwandelnde Kantenliste
+     * @return die resultierende Adjazenzliste
+     */
     private static List<List<Kante>> getAdjacencyListFromEdgeList(int[] kantenListe) {
         if (kantenListe.length < 1) {
             throw new IllegalArgumentException("Edge list is empty");
@@ -31,6 +48,12 @@ public class Dijkstra {
         return kanten;
     }
 
+    /**
+     * Sucht den minimalen Wert, der noch nicht besucht wurde
+     * @param arr Werte
+     * @param visited besuchte Werte
+     * @return index des minimalen noch nicht besuchten Wertes, -1 falls keiner existiert
+     */
     private static int getIndexOfMinimumNotVisited(int[] arr, boolean[] visited) {
         int min = Integer.MAX_VALUE;
         int idx = -1;
@@ -43,6 +66,11 @@ public class Dijkstra {
         return idx;
     }
 
+    /**
+     * Gibt die Daten formatiert aus
+     * @param data auszugebende Daten
+     * @param undefinedValue Zahl die durch "--" ersetzt werden soll
+     */
     private static void printData(int[] data, int undefinedValue) {
         System.out.print("|");
         for (int i = 2; i < data.length; i++) {
@@ -54,9 +82,17 @@ public class Dijkstra {
         }
     }
 
+    /**
+     * Wendet Dijkstra auf den uebergebenen Graphen an und gibt das dazugehoerige Dijkstra-Schema aus
+     * @param kantenListe
+     */
     public static void printDijkstra(int[] kantenListe) {
         List<List<Kante>> kanten = getAdjacencyListFromEdgeList(kantenListe);
 
+        // 0 oder 1 Node ergeben kein sinnvolles Dijkstra-Diagramm
+        if (kanten.size() < 2) return;
+
+        // Header-Zeile des Dijkstra-Schema
         System.out.print("vi");
         var indices = IntStream.range(0, kanten.size()).toArray();
         printData(indices, -1);
@@ -69,9 +105,11 @@ public class Dijkstra {
         boolean[] visited = new boolean[kanten.size()];
         Arrays.fill(distances, Integer.MAX_VALUE);
 
+        // Startknoten 1
         distances[1] = 0;
         while (true) {
             int newlyAdded = getIndexOfMinimumNotVisited(distances, visited);
+            // Bricht ab, wenn es keinen unbesuchten, erreichbaren Knoten mehr gibt
             if (newlyAdded < 1) break;
 
             visited[newlyAdded] = true;
@@ -83,12 +121,12 @@ public class Dijkstra {
                 }
             }
 
+            // Ausgabe Daten
             System.out.printf("%2s", newlyAdded);
             printData(distances, Integer.MAX_VALUE);
             printData(parents, 0);
             System.out.println("|");
         }
-
     }
 
 }

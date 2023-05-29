@@ -18,6 +18,15 @@ public class DijkstraTest {
         Dijkstra.printDijkstra(new int[]{
             6, 1,2,20, 1,3,10, 2,4,30, 2,5,20, 3,4,10, 3,5,20, 4,6,10, 5,6,30
         });
+        System.out.println();
+
+        Dijkstra.printDijkstra(new int[]{5});
+
+        try {
+            Dijkstra.printDijkstra(new int[]{});
+            throw new RuntimeException("Should have thrown an exception but nothing happened");
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
 }
