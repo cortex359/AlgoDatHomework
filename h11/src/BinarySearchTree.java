@@ -1,15 +1,57 @@
-/** Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz:
+/**
+ * Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz:
  * Vorlage fuer die A1 von algo-pr05 und fuer die A1 von algo-h06.
  * Als Operationen stehen `contains' und `insert' zur Verfuegung
  */
 public class BinarySearchTree {
 
-    /** Die Knotenklasse als statische innere Klasse. */
+    /**
+     * Die Knotenklasse als statische innere Klasse.
+     */
     public static class TreeNode {
         private int value;
         private TreeNode left;
         private TreeNode right;
 
+        //region Hausaufgabe 11
+        /************************************** BEGIN *************************** */
+        private int sumOfSubNodes = 0;
+        private int numberOfSubNodes = 0;
+
+        public double getAverageOfSubtree() {
+            return this.sumOfSubNodes / this.numberOfSubNodes;
+        }
+
+        private void removeSubtreeStats(TreeNode node) {
+            this.sumOfSubNodes -= node.sumOfSubNodes;
+            this.numberOfSubNodes -= node.numberOfSubNodes + 1;
+        }
+
+        private void addSubtreeStats(TreeNode node) {
+            this.sumOfSubNodes += node.sumOfSubNodes;
+            this.numberOfSubNodes += node.numberOfSubNodes + 1;
+        }
+
+        public void setLeft(TreeNode node) {
+            if (this.left != null)
+                removeSubtreeStats(this.left);
+
+            this.left = node;
+            addSubtreeStats(node);
+        }
+
+        public void setRight(TreeNode node) {
+            if (this.right != null)
+                removeSubtreeStats(this.right);
+
+            this.right = node;
+            addSubtreeStats(node);
+        }
+
+        /************************************** END *************************** */
+        //endregion
+
+        //region Unmodifiziert
         public TreeNode(int value) {
             this.value = value;
         }
@@ -33,28 +75,24 @@ public class BinarySearchTree {
         public void setValue(int value) {
             this.value = value;
         }
-
-        public void setLeft(TreeNode node) {
-            this.left = node;
-        }
-
-        public void setRight(TreeNode node) {
-            this.right= node;
-        }
+        //endregion
     }
 
-    /** Baumwurzel */
+    //region Unmodifiziert
+    /**
+     * Baumwurzel
+     */
     protected TreeNode root;
 
     /**
      * Herausfinden, ob ein gewisser Datensatz schon im binaeren Suchbaum enthalten ist.
      *
-     * @param   data  zu suchender Datensatz
-     * @return        true: Datensatz ist vorhanden; false: Datensatz ist nicht vorhanden.
+     * @param data zu suchender Datensatz
+     * @return true: Datensatz ist vorhanden; false: Datensatz ist nicht vorhanden.
      */
     public boolean contains(int data) {
         TreeNode temp = root;
-        while(temp != null) {
+        while (temp != null) {
             if (temp.getValue() == data) {
                 return true;
             }
@@ -70,8 +108,8 @@ public class BinarySearchTree {
     /**
      * Einen neuen Datensatz in den binaeren Suchbaum einfuegen.
      *
-     * @param   data  einzufuegender Datensatz
-     * @return        true: Datensatz wurde eingefuegt; false: Datensatz war schon vorhanden.
+     * @param data einzufuegender Datensatz
+     * @return true: Datensatz wurde eingefuegt; false: Datensatz war schon vorhanden.
      */
     public boolean insert(int data) {
         if (root == null) {
@@ -80,9 +118,9 @@ public class BinarySearchTree {
         }
 
         TreeNode temp = root;
-        while(temp.getValue() != data) {
+        while (temp.getValue() != data) {
             if (temp.getValue() > data) {
-                if(temp.getLeft() == null) {
+                if (temp.getLeft() == null) {
                     temp.setLeft(new TreeNode(data));
                     return true;
                 }
@@ -98,18 +136,6 @@ public class BinarySearchTree {
         return false;
     }
 
-    /** diese Klasse testen
-     @param  args  Parameter des Programmaufrufs */
-    public static void main(String[] args) {
-        BinarySearchTree tree = new BinarySearchTree();
-        for (int i = 0; i < 20; i++) {
-            int x = (int) (Math.random() * 50);
-            System.out.println(x);
-            tree.insert(x);
-        }
-        for (int i = 0; i < 50; i++) {
-            System.out.println(i + ": " + tree.contains(i));
-        }
-    }
+    //endregion
 }
 

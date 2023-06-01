@@ -2,6 +2,15 @@
 
 ## Aufgabe 1a
 
+> Gegeben sei ein binärer Suchbaum mit ganzzahligen Schlüsseln. Reichern Sie die Datenstruktur so an, dass Sie den 
+> Mittelwert der Schlüssel in einem beliebigen Unterbaum in konstanter Zeit berechnen können, falls die Wurzel des 
+> Unterbaums gegeben ist.
+> 
+> Welche zusätzlichen Informationen müssen an den Knoten des Suchbaums gespeichert werden, und was muss beim Einfügen 
+> und Löschen von Knoten beachtet werden, damit die Information immer korrekt ist?
+> 
+> Beschreiben Sie die Lösch- und Einfügeoperation schriftlich als Text (zusätzlich zum Code in Aufgabenteil b).
+
 Um den Mittelwert der Schlüssel in einem beliebigen Unterbaum in konstanter Zeit berechnen zu können, können wir
 zusätzliche Informationen in den Knoten des binären Suchbaums speichern. Jeder Knoten sollte die folgenden Informationen
 enthalten:
@@ -36,9 +45,7 @@ Informationen korrekt aktualisiert werden. Hier ist der Algorithmus für die Lö
    gehen wir den Pfad von der Wurzel zum gelöschten Knoten zurück und aktualisieren die Anzahl der Knoten und die Summe
    der Schlüssel in jedem besuchten Knoten. Dies kann in konstanter Zeit erfolgen, da die zusätzlichen Informationen in
    jedem Knoten gespeichert sind.
-2. Wenn der zu löschende Knoten einen oder zwei Kinder hat, müssen
-
-wir ihn durch den geeigneten Nachfolger oder Vorgänger ersetzen und dann den Nachfolger oder Vorgänger löschen. Der
+2. Wenn der zu löschende Knoten einen oder zwei Kinder hat, müssen wir ihn durch den geeigneten Nachfolger oder Vorgänger ersetzen und dann den Nachfolger oder Vorgänger löschen. Der
 Nachfolger oder Vorgänger kann in konstanter Zeit gefunden werden, da die zusätzlichen Informationen im Baum vorhanden
 sind. Nachdem der Nachfolger oder Vorgänger gelöscht wurde, müssen wir die zusätzlichen Informationen im gesamten Pfad
 von der Wurzel zum gelöschten Knoten aktualisieren, indem wir den Pfad zurückgehen und die Anzahl der Knoten und die

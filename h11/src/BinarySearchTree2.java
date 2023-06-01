@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -7,24 +8,40 @@ import java.util.LinkedList;
  * Als Operationen stehen zusaetzlich zu denen der Basisklasse
  * `clear', `show', `getNode', `remove' und `isLeaf' zur Verfuegung.
  *
- * @author
- * Autor: Juergen Dietel, ITC/CSE/MATSE, RWTH Aachen<br>
+ * @author Autor: Juergen Dietel, ITC/CSE/MATSE, RWTH Aachen<br>
  * Datum: FR 4. 6. 2021 - MI 26. 4. 2023
  */
 public class BinarySearchTree2 extends BinarySearchTree {
 
-    /** den Baum leeren */
+    /**
+     * Sucht den Knoten mit dem übergebenen Wert und berechnet den Mittelwert aller Knoten des entsprechenden Unterbaums
+     * @param val Schlüssel
+     * @return Mittelwert aller Knoten des Unterbaums
+     */
+    public double getAverageOfSubtree(int val) {
+        if (!super.contains(val))
+            throw new NoSuchElementException();
+
+        return this.getNode(val).getAverageOfSubtree()
+    }
+
+    //region Unmodifiziert
+    /**
+     * den Baum leeren
+     */
     public void clear() {
         this.root = null;
     }
 
-    /** den Baum levelorder ausgeben */
+    /**
+     * den Baum levelorder ausgeben
+     */
     public void show() {
         System.out.print("Baum levelorder = [ ");
         if (this.root != null) {
             Queue<TreeNode> schlange = new LinkedList<>();
             schlange.add(this.root);
-            while (! schlange.isEmpty()) {
+            while (!schlange.isEmpty()) {
                 TreeNode k = schlange.remove();
                 System.out.print(k + " ");
                 if (k.getLeft() != null)
@@ -39,12 +56,12 @@ public class BinarySearchTree2 extends BinarySearchTree {
     /**
      * Sucht nach dem Wert x im Baum (iterativ).
      *
-     * @param   x  zu suchender Wert
-     * @return     Knoten, der den Wert x enthaelt, oder null
+     * @param x zu suchender Wert
+     * @return Knoten, der den Wert x enthaelt, oder null
      */
     public TreeNode getNode(int x) {
         TreeNode node = this.root;
-        while (node != null && node.getValue()!= x) {
+        while (node != null && node.getValue() != x) {
             if (x < node.getValue())
                 node = node.getLeft();
             else
@@ -56,13 +73,13 @@ public class BinarySearchTree2 extends BinarySearchTree {
     /**
      * Loescht den Knoten mit dem Wert n iterativ, falls vorhanden.
      *
-     * @param   n                    Wert, dessen Knoten geloescht werden soll
-     * @throws  ArithmeticException  wenn der Wert nicht im Baum enthalten ist
+     * @param n Wert, dessen Knoten geloescht werden soll
+     * @throws ArithmeticException wenn der Wert nicht im Baum enthalten ist
      */
     public void remove(int n) {
 
         TreeNode parent = null;       // Zeigerpaar aus Knoten und seinem
-        TreeNode node   = this.root;  // Elter, beginnend bei der Wurzel
+        TreeNode node = this.root;  // Elter, beginnend bei der Wurzel
 
         while (node != null) {
             if (node.getValue() == n) { // Knoten mit n drin gefunden?
@@ -70,7 +87,7 @@ public class BinarySearchTree2 extends BinarySearchTree {
                 return;                   // Knoten entfernt => Methode beenden
             }
             parent = node;              // erstmal neuen Elter setzen
-            node   = nextNode(node, n); // im richtigen Teilbaum weitersuchen
+            node = nextNode(node, n); // im richtigen Teilbaum weitersuchen
         }
         // regulaeres Schleifenende => Knoten nicht gefunden, Ausnahme:
         throw new ArithmeticException("Knoten " + n + " gibt es nicht!");
@@ -82,8 +99,8 @@ public class BinarySearchTree2 extends BinarySearchTree {
      * Hilfsmethode fuer `remove(int n)':
      * den Knoten `node' mit dem Elternknoten `parent' aus dem Baum entfernen.
      *
-     * @param  node    aus dem Baum zu entfernender Knoten
-     * @param  parent  Elter des zu entfernenden Knotens
+     * @param node   aus dem Baum zu entfernender Knoten
+     * @param parent Elter des zu entfernenden Knotens
      */
     protected void remove(TreeNode node, TreeNode parent) {
 
@@ -98,8 +115,8 @@ public class BinarySearchTree2 extends BinarySearchTree {
     /**
      * Herausfinden, ob der gegebene Knoten ein Blatt ist.
      *
-     * @param   baum  zu pruefender Baumknoten
-     * @return        Ist der Knoten ein Blatt?
+     * @param baum zu pruefender Baumknoten
+     * @return Ist der Knoten ein Blatt?
      */
     public static boolean isLeaf(TreeNode baum) {
         return baum.getLeft() == null && baum.getRight() == null;
@@ -108,8 +125,8 @@ public class BinarySearchTree2 extends BinarySearchTree {
     /**
      * Melden, ob der uebergebene Knoten 2 Kinder hat.
      *
-     * @param   baum  zu pruefender Baumknoten
-     * @return        Hat der uebergebene Knoten 2 Kinder?
+     * @param baum zu pruefender Baumknoten
+     * @return Hat der uebergebene Knoten 2 Kinder?
      */
     public static boolean isInnerNode(TreeNode baum) {
         return baum.getLeft() != null && baum.getRight() != null;
@@ -119,20 +136,20 @@ public class BinarySearchTree2 extends BinarySearchTree {
      * Hilfsmethode fuer `remove(int n)':
      * weiter zum Teilbaum, wo Knoten n liegen muss
      *
-     * @param   node  aktueller Knoten
-     * @param   n     gesuchter Knoteninhalt
-     * @return        Teilbaum, in dem der gesuchte Knoten liegen muss
+     * @param node aktueller Knoten
+     * @param n    gesuchter Knoteninhalt
+     * @return Teilbaum, in dem der gesuchte Knoten liegen muss
      */
     protected TreeNode nextNode(TreeNode node, int n) {
-        return (n < node.getValue())? node.getLeft() : node.getRight();
+        return (n < node.getValue()) ? node.getLeft() : node.getRight();
     }
 
     /**
      * Den Blattknoten `node' mit `parent' als Elter aus dem Baum entfernen,
      * falls nur ein Blatt entfernt werden muss.
      *
-     * @param  node    aus dem Baum zu entfernender Knoten
-     * @param  parent  Elter des zu entfernenden Knotens
+     * @param node   aus dem Baum zu entfernender Knoten
+     * @param parent Elter des zu entfernenden Knotens
      */
     private void removeLeaf(TreeNode node, TreeNode parent) {
         if (parent == null)                 // kein Elter vorhanden?
@@ -146,10 +163,10 @@ public class BinarySearchTree2 extends BinarySearchTree {
     /**
      * Den Knoten `node' aus dem Baum entfernen, falls der Knoten nur ein Kind hat.
      *
-     * @param  node    aus dem Baum zu entfernender Knoten
+     * @param node aus dem Baum zu entfernender Knoten
      */
     private void removeOneChild(TreeNode node) {
-        TreeNode kind  = (node.getLeft() != null) ? node.getLeft() : node.getRight();
+        TreeNode kind = (node.getLeft() != null) ? node.getLeft() : node.getRight();
         node.setValue(kind.getValue());  // Inhalt des Kindes in den zu loeschenden
         node.setLeft(kind.getLeft());    // Knoten kopieren, der damit faktisch
         node.setRight(kind.getRight());  // verschwunden ist
@@ -159,19 +176,19 @@ public class BinarySearchTree2 extends BinarySearchTree {
      * den Knoten `node' aus dem Baum entfernen, falls der Knoten ein
      * normaler innerer Knoten mit 2 Kindern ist.
      *
-     * @param  node    aus dem Baum zu entfernender Knoten
+     * @param node aus dem Baum zu entfernender Knoten
      */
     protected void removeTwoChildren(TreeNode node) {
 
         // den Ersatzknoten fuer den zu entfernenden Knoten suchen, also
         // den naechstgroesseren im rechten Teilbaum, gleichzeitig auch
         // noch den Elternknoten des Ersatzknotens:
-        TreeNode elter  = node;
+        TreeNode elter = node;
         TreeNode ersatz = elter.getRight();     // vom rechten Kind des zu
-        for ( ;                                 // loeschenden aus so weit
-              ersatz.getLeft() != null;          // weit nach links gehen wie
-              elter = ersatz,                    // moeglich, dabei einen
-                      ersatz = elter.getLeft())          // Elternknoten mitfuehren
+        for (;                                 // loeschenden aus so weit
+             ersatz.getLeft() != null;          // weit nach links gehen wie
+             elter = ersatz,                    // moeglich, dabei einen
+                     ersatz = elter.getLeft())          // Elternknoten mitfuehren
             ;
 
         // Der Ersatzknoten tritt nun an die Stelle des zu loeschenden Knotens:
@@ -183,5 +200,7 @@ public class BinarySearchTree2 extends BinarySearchTree {
         else                                    // Schleife mindestens einmal durchlaufen?
             elter.setLeft(ersatz.getRight());     // => neues linkes Kind im Elternknoten
     }
+
+    //endregion
 }
 
