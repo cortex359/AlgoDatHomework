@@ -34,8 +34,11 @@ public class BinarySearchTreeTest {
     public static void main(String[] args) {
 
         System.out.println("Erzeugt einen Suchbaum mit ganzzahligen Schluesseln...");
-        //BinarySearchTree2 tree = fixedTree(new int[]{34, 8, 41, 36, 12, 9, 17, 37, 2, 30, 20, 32, 19, 42, 1});
-        BinarySearchTree2 tree = randomTree();
+        //BinarySearchTree2 tree = randomTree();
+
+        BinarySearchTree2 tree = fixedTree(new int[]{34, 8, 41, 36, 12, 9, 17, 37, 2, 30, 20, 32, 19, 42, 1, 49});
+        tree.remove(49);
+
         tree.show();
         System.out.println("Gehe die Schluessel in aufsteigender Reihenfolge durch und gebe jeweils den Mittelwert, " +
                 "sowie die Summe und die Anzahl der SubTree Nodes (einschliesslich der aktuellen Node) aus:");
