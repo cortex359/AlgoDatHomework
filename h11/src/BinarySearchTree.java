@@ -1,7 +1,5 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
-
 /**
  * BinarySearchTree 3
  * ==================
@@ -36,7 +34,7 @@ public class BinarySearchTree {
         public int numberOfSubNodes = 1; // including this one
 
         public double getAverageOfSubtree() {
-            return (this.sumOfSubNodes * 1.0 / this.numberOfSubNodes);
+            return this.sumOfSubNodes / (double) this.numberOfSubNodes;
         }
 
         public TreeNode(int value) {
@@ -107,33 +105,6 @@ public class BinarySearchTree {
             t.sumOfSubNodes -= data;
             t.numberOfSubNodes -= 1;
         }
-    }
-
-    /**
-     * pathToNode erzeugt den Pfad zu einer Node mit dem uebergebenen Wert.
-     * @param data Schluessel
-     * @return Pfad als Deque von TreeNodes.
-     */
-    protected Deque<TreeNode> pathToNode(int data) {
-        if (!this.contains(data))
-            throw new NoSuchElementException();
-
-        // Speichere Pfad der nach dem Einfuegen zu updatenden Daten
-        Deque<TreeNode> path = new ArrayDeque<>();
-        TreeNode temp = root;
-
-        while (temp != null) {
-            path.add(temp);
-            if (temp.getValue() == data) {
-                return path;
-            }
-            if (temp.getValue() > data) {
-                temp = temp.getLeft();
-            } else {
-                temp = temp.getRight();
-            }
-        }
-        return path;
     }
 
     /**

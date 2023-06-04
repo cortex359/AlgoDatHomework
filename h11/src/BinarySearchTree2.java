@@ -1,6 +1,4 @@
-import java.util.NoSuchElementException;
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * BinarySearchTree 3
@@ -52,10 +50,16 @@ public class BinarySearchTree2 extends BinarySearchTree {
         TreeNode parent = null;    // Zeigerpaar aus Knoten und seinem
         TreeNode node = this.root; // Eltern, beginnend bei der Wurzel
 
+        // Speichere Pfad der nach dem Loeschen zu updatenden Daten
+        Deque<TreeNode> path = new ArrayDeque<>();
+
         while (node != null) {
+            path.add(node); // speichere Pfad beim Loeschen
             if (node.getValue() == n) { // Knoten mit n drin gefunden?
-                /** folge dem Pfad zu der Node und aendere alle sumOfSubNodes/numberOfSubNodes Attribute **/
-                removeFromStats(pathToNode(node.getValue()), node.getValue());
+
+                // aendere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
+                removeFromStats(path, node.getValue());
+
                 remove(node, parent);     // diesen Knoten aus dem Baum entfernen
                 return;                   // Knoten entfernt => Methode beenden
             }
