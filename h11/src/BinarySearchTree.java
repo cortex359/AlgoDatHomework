@@ -84,9 +84,9 @@ public class BinarySearchTree {
     //region Hausaufgabe 11
     /************************************************** BEGIN ***************************************************/
     /**
-     * addToStats arbeitet eine Queue mit TreeNodes ab, welche durch das Einfügen einer Node geupdated werden müssen.
+     * addToStats arbeitet eine Queue mit TreeNodes ab, welche durch das Einfuegen einer Node geupdated werden muessen.
      * @param path Deque mit betroffenen TreeNodes.
-     * @param data Neuer Wert, der den Summen hinzugefügt werden muss.
+     * @param data Neuer Wert, der den Summen hinzugefuegt werden muss.
      */
     protected void addToStats(Deque<TreeNode> path, int data) {
         while (!path.isEmpty()) {
@@ -97,7 +97,7 @@ public class BinarySearchTree {
     }
 
     /**
-     * removeFromStats arbeitet eine Queue mit TreeNodes ab, welche durch das Löschen einer Node geupdated werden müssen.
+     * removeFromStats arbeitet eine Queue mit TreeNodes ab, welche durch das Loeschen einer Node geupdated werden muessen.
      * @param path Deque mit betroffenen TreeNodes.
      * @param data Wert, der von den Summen abgezogen werden muss.
      */
@@ -110,15 +110,15 @@ public class BinarySearchTree {
     }
 
     /**
-     * pathToNode erzeugt den Pfad zu einer Node mit dem übergebenen Wert.
-     * @param data Schlüssel
+     * pathToNode erzeugt den Pfad zu einer Node mit dem uebergebenen Wert.
+     * @param data Schluessel
      * @return Pfad als Deque von TreeNodes.
      */
     protected Deque<TreeNode> pathToNode(int data) {
         if (!this.contains(data))
             throw new NoSuchElementException();
 
-        // Speichere Pfad der nach dem Einfügen zu updatenden Daten
+        // Speichere Pfad der nach dem Einfuegen zu updatenden Daten
         Deque<TreeNode> path = new ArrayDeque<>();
         TreeNode temp = root;
 
@@ -148,22 +148,22 @@ public class BinarySearchTree {
             return true;
         }
 
-        // Überprüfung ob Einfügen möglich ist.
+        // Ueberpruefung ob Einfuegen moeglich ist.
         if (this.contains(data))
             return false;
 
-        // Speichere Pfad der nach dem Einfügen zu updatenden Daten
+        // Speichere Pfad der nach dem Einfuegen zu updatenden Daten
         Deque<TreeNode> path = new ArrayDeque<>();
 
         TreeNode temp = root;
         while (temp.getValue() != data) {
-            path.add(temp); // speichere Pfad beim Einfügen
+            path.add(temp); // speichere Pfad beim Einfuegen
 
             if (temp.getValue() > data) {
                 if (temp.getLeft() == null) {
                     temp.setLeft(new TreeNode(data));
 
-                    // ändere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
+                    // aendere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
                     addToStats(path, data);
                     return true;
                 }
@@ -172,7 +172,7 @@ public class BinarySearchTree {
                 if (temp.getRight() == null) {
                     temp.setRight(new TreeNode(data));
 
-                    // // ändere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
+                    // // aendere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
                     addToStats(path, data);
                     return true;
                 }

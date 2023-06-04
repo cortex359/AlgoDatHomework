@@ -14,7 +14,7 @@ import java.util.LinkedList;
  * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
  * @author Michael Conrads, michael.conrads@rwth-aachen.de
  *
- * Ursprünglicher Kommentar:
+ * Urspruenglicher Kommentar:
  * Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz:
  * Grundlage fuer die Musterloesung zu algo-h06 und Vorlage fuer algo-h11.
  * Als Operationen stehen zusaetzlich zu denen der Basisklasse
@@ -27,8 +27,8 @@ public class BinarySearchTree2 extends BinarySearchTree {
     //region Hausaufgabe 11
     /**************************************************** BEGIN *****************************************************/
     /**
-     * Sucht den Knoten mit dem übergebenen Wert und berechnet den Mittelwert aller Knoten des entsprechenden Unterbaums
-     * @param val Schlüssel
+     * Sucht den Knoten mit dem uebergebenen Wert und berechnet den Mittelwert aller Knoten des entsprechenden Unterbaums
+     * @param val Schluessel
      * @return Mittelwert aller Knoten des Unterbaums
      */
     public double getAverageOfSubtree(int val) {
@@ -45,7 +45,7 @@ public class BinarySearchTree2 extends BinarySearchTree {
      * @throws ArithmeticException wenn der Wert nicht im Baum enthalten ist
      */
     public void remove(int n) {
-        // Überprüfung, ob Löschen möglich ist.
+        // Ueberpruefung, ob Loeschen moeglich ist.
         if (!this.contains(n))
             throw new IllegalArgumentException();
 
@@ -54,7 +54,7 @@ public class BinarySearchTree2 extends BinarySearchTree {
 
         while (node != null) {
             if (node.getValue() == n) { // Knoten mit n drin gefunden?
-                /** folge dem Pfad zu der Node und ändere alle sumOfSubNodes/numberOfSubNodes Attribute **/
+                /** folge dem Pfad zu der Node und aendere alle sumOfSubNodes/numberOfSubNodes Attribute **/
                 removeFromStats(pathToNode(node.getValue()), node.getValue());
                 remove(node, parent);     // diesen Knoten aus dem Baum entfernen
                 return;                   // Knoten entfernt => Methode beenden
