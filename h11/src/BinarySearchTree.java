@@ -1,3 +1,7 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.NoSuchElementException;
+
 /**
  * Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz:
  * Vorlage fuer die A1 von algo-pr05 und fuer die A1 von algo-h06.
@@ -10,50 +14,32 @@ public class BinarySearchTree {
      */
     public static class TreeNode {
         private int value;
-        private TreeNode left;
+        private TreeNode left ;
         private TreeNode right;
 
         //region Hausaufgabe 11
-        /************************************** BEGIN *************************** */
-        private int sumOfSubNodes = 0;
-        private int numberOfSubNodes = 0;
+        /************************************************** BEGIN ***************************************************/
+        public int sumOfSubNodes = 0; // including this one
+        public int numberOfSubNodes = 1; // including this one
 
         public double getAverageOfSubtree() {
-            return this.sumOfSubNodes / this.numberOfSubNodes;
+            return (this.sumOfSubNodes * 1.0 / this.numberOfSubNodes);
         }
 
-        private void removeSubtreeStats(TreeNode node) {
-            this.sumOfSubNodes -= node.sumOfSubNodes;
-            this.numberOfSubNodes -= node.numberOfSubNodes + 1;
+        public TreeNode(int value) {
+            this.value = value;
+            this.sumOfSubNodes = value;
         }
-
-        private void addSubtreeStats(TreeNode node) {
-            this.sumOfSubNodes += node.sumOfSubNodes;
-            this.numberOfSubNodes += node.numberOfSubNodes + 1;
-        }
-
-        public void setLeft(TreeNode node) {
-            if (this.left != null)
-                removeSubtreeStats(this.left);
-
-            this.left = node;
-            addSubtreeStats(node);
-        }
-
-        public void setRight(TreeNode node) {
-            if (this.right != null)
-                removeSubtreeStats(this.right);
-
-            this.right = node;
-            addSubtreeStats(node);
-        }
-
-        /************************************** END *************************** */
+        /*************************************************** END ****************************************************/
         //endregion
 
         //region Unmodifiziert
-        public TreeNode(int value) {
-            this.value = value;
+        public void setLeft(TreeNode node) {
+            this.left = node;
+        }
+
+        public void setRight(TreeNode node) {
+            this.right = node;
         }
 
         public String toString() {
@@ -73,10 +59,116 @@ public class BinarySearchTree {
         }
 
         public void setValue(int value) {
+            if (this.value != 0) {
+                this.sumOfSubNodes -= this.value;
+            }
             this.value = value;
+            this.sumOfSubNodes += value;
         }
         //endregion
     }
+
+    //region Hausaufgabe 11
+    /************************************************** BEGIN ***************************************************/
+    /**
+     * addToStats arbeitet eine Queue mit TreeNodes ab, welche durch das Einfügen einer Node geupdated werden müssen.
+     * @param path Deque mit betroffenen TreeNodes.
+     * @param data Neuer Wert, der den Summen hinzugefügt werden muss.
+     */
+    protected void addToStats(Deque<TreeNode> path, int data) {
+        while (!path.isEmpty()) {
+            TreeNode t = path.pop();
+            t.sumOfSubNodes += data;
+            t.numberOfSubNodes += 1;
+        }
+    }
+
+    /**
+     * removeFromStats arbeitet eine Queue mit TreeNodes ab, welche durch das Löschen einer Node geupdated werden müssen.
+     * @param path Deque mit betroffenen TreeNodes.
+     * @param data Wert, der von den Summen abgezogen werden muss.
+     */
+    protected void removeFromStats(Deque<TreeNode> path, int data) {
+        while (!path.isEmpty()) {
+            TreeNode t = path.pop();
+            t.sumOfSubNodes -= data;
+            t.numberOfSubNodes -= 1;
+        }
+    }
+
+    /**
+     * pathToNode erzeugt den Pfad zu einer Node mit dem übergebenen Wert.
+     * @param data Schlüssel
+     * @return Pfad als Deque von TreeNodes.
+     */
+    protected Deque<TreeNode> pathToNode(int data) {
+        if (!this.contains(data))
+            throw new NoSuchElementException();
+
+        // Speichere Pfad der nach dem Einfügen zu updatenden Daten
+        Deque<TreeNode> path = new ArrayDeque<>();
+        TreeNode temp = root;
+
+        while (temp != null) {
+            path.add(temp);
+            if (temp.getValue() == data) {
+                return path;
+            }
+            if (temp.getValue() > data) {
+                temp = temp.getLeft();
+            } else {
+                temp = temp.getRight();
+            }
+        }
+        return path;
+    }
+
+    /**
+     * Einen neuen Datensatz in den binaeren Suchbaum einfuegen.
+     *
+     * @param data einzufuegender Datensatz
+     * @return true: Datensatz wurde eingefuegt; false: Datensatz war schon vorhanden.
+     */
+    public boolean insert(int data) {
+        if (root == null) {
+            root = new TreeNode(data);
+            return true;
+        }
+
+        // Überprüfung ob Einfügen möglich ist.
+        if (this.contains(data))
+            return false;
+
+        // Speichere Pfad der nach dem Einfügen zu updatenden Daten
+        Deque<TreeNode> path = new ArrayDeque<>();
+
+        TreeNode temp = root;
+        while (temp.getValue() != data) {
+            path.add(temp); // speichere Pfad beim Einfügen
+
+            if (temp.getValue() > data) {
+                if (temp.getLeft() == null) {
+                    temp.setLeft(new TreeNode(data));
+
+                    // ändere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
+                    addToStats(path, data);
+                    return true;
+                }
+                temp = temp.getLeft();
+            } else {
+                if (temp.getRight() == null) {
+                    temp.setRight(new TreeNode(data));
+
+                    // // ändere alle sumOfSubNodes/numberOfSubNodes-Attribute der durchlaufenen TreeNodes
+                    addToStats(path, data);
+                    return true;
+                }
+                temp = temp.getRight();
+            }
+        }
+        return false;
+    }
+    //endregion
 
     //region Unmodifiziert
     /**
@@ -99,37 +191,6 @@ public class BinarySearchTree {
             if (temp.getValue() > data) {
                 temp = temp.getLeft();
             } else {
-                temp = temp.getRight();
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Einen neuen Datensatz in den binaeren Suchbaum einfuegen.
-     *
-     * @param data einzufuegender Datensatz
-     * @return true: Datensatz wurde eingefuegt; false: Datensatz war schon vorhanden.
-     */
-    public boolean insert(int data) {
-        if (root == null) {
-            root = new TreeNode(data);
-            return true;
-        }
-
-        TreeNode temp = root;
-        while (temp.getValue() != data) {
-            if (temp.getValue() > data) {
-                if (temp.getLeft() == null) {
-                    temp.setLeft(new TreeNode(data));
-                    return true;
-                }
-                temp = temp.getLeft();
-            } else {
-                if (temp.getRight() == null) {
-                    temp.setRight(new TreeNode(data));
-                    return true;
-                }
                 temp = temp.getRight();
             }
         }

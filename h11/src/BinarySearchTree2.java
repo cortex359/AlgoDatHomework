@@ -12,7 +12,8 @@ import java.util.LinkedList;
  * Datum: FR 4. 6. 2021 - MI 26. 4. 2023
  */
 public class BinarySearchTree2 extends BinarySearchTree {
-
+    //region Hausaufgabe 11
+    /**************************************************** BEGIN *****************************************************/
     /**
      * Sucht den Knoten mit dem übergebenen Wert und berechnet den Mittelwert aller Knoten des entsprechenden Unterbaums
      * @param val Schlüssel
@@ -22,8 +23,39 @@ public class BinarySearchTree2 extends BinarySearchTree {
         if (!super.contains(val))
             throw new NoSuchElementException();
 
-        return this.getNode(val).getAverageOfSubtree()
+        return this.getNode(val).getAverageOfSubtree();
     }
+
+    /**
+     * Loescht den Knoten mit dem Wert n iterativ, falls vorhanden.
+     *
+     * @param n Wert, dessen Knoten geloescht werden soll
+     * @throws ArithmeticException wenn der Wert nicht im Baum enthalten ist
+     */
+    public void remove(int n) {
+        // Überprüfung, ob Löschen möglich ist.
+        if (!this.contains(n))
+            throw new IllegalArgumentException();
+
+        TreeNode parent = null;    // Zeigerpaar aus Knoten und seinem
+        TreeNode node = this.root; // Eltern, beginnend bei der Wurzel
+
+        while (node != null) {
+            if (node.getValue() == n) { // Knoten mit n drin gefunden?
+                /** folge dem Pfad zu der Node und ändere alle sumOfSubNodes/numberOfSubNodes Attribute **/
+                removeFromStats(pathToNode(node.getValue()), node.getValue());
+                remove(node, parent);     // diesen Knoten aus dem Baum entfernen
+                return;                   // Knoten entfernt => Methode beenden
+            }
+            parent = node;              // erstmal neuen Elter setzen
+            node = nextNode(node, n); // im richtigen Teilbaum weitersuchen
+        }
+        // regulaeres Schleifenende => Knoten nicht gefunden, Ausnahme:
+        throw new ArithmeticException("Knoten " + n + " gibt es nicht!");
+    }
+
+    //endregion
+    /***************************************************** END ******************************************************/
 
     //region Unmodifiziert
     /**
@@ -71,31 +103,6 @@ public class BinarySearchTree2 extends BinarySearchTree {
     }
 
     /**
-     * Loescht den Knoten mit dem Wert n iterativ, falls vorhanden.
-     *
-     * @param n Wert, dessen Knoten geloescht werden soll
-     * @throws ArithmeticException wenn der Wert nicht im Baum enthalten ist
-     */
-    public void remove(int n) {
-
-        TreeNode parent = null;       // Zeigerpaar aus Knoten und seinem
-        TreeNode node = this.root;  // Elter, beginnend bei der Wurzel
-
-        while (node != null) {
-            if (node.getValue() == n) { // Knoten mit n drin gefunden?
-                remove(node, parent);     // diesen Knoten aus dem Baum entfernen
-                return;                   // Knoten entfernt => Methode beenden
-            }
-            parent = node;              // erstmal neuen Elter setzen
-            node = nextNode(node, n); // im richtigen Teilbaum weitersuchen
-        }
-        // regulaeres Schleifenende => Knoten nicht gefunden, Ausnahme:
-        throw new ArithmeticException("Knoten " + n + " gibt es nicht!");
-    }
-
-    // Hilfsmethoden fuer `remove(int n')
-
-    /**
      * Hilfsmethode fuer `remove(int n)':
      * den Knoten `node' mit dem Elternknoten `parent' aus dem Baum entfernen.
      *
@@ -103,7 +110,6 @@ public class BinarySearchTree2 extends BinarySearchTree {
      * @param parent Elter des zu entfernenden Knotens
      */
     protected void remove(TreeNode node, TreeNode parent) {
-
         if (isLeaf(node))                   // 1. Fall: Blatt
             removeLeaf(node, parent);
         else if (isInnerNode(node))         // 2. Fall: zwei Kinder
