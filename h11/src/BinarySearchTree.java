@@ -3,6 +3,19 @@ import java.util.Deque;
 import java.util.NoSuchElementException;
 
 /**
+ * BinarySearchTree 3
+ * ==================
+ * Hausaufgabe 11: Erweiterung um Mittelwert Funktion in O(1).
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 30.05.2023
+ * Abgabe der Loesungen am 04.06.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
+
+/**
  * Ein binaerer Suchbaum mit ganzen Zahlen als Datensatz:
  * Vorlage fuer die A1 von algo-pr05 und fuer die A1 von algo-h06.
  * Als Operationen stehen `contains' und `insert' zur Verfuegung
@@ -19,7 +32,7 @@ public class BinarySearchTree {
 
         //region Hausaufgabe 11
         /************************************************** BEGIN ***************************************************/
-        public int sumOfSubNodes = 0; // including this one
+        public int sumOfSubNodes; // including this one
         public int numberOfSubNodes = 1; // including this one
 
         public double getAverageOfSubtree() {
@@ -168,6 +181,7 @@ public class BinarySearchTree {
         }
         return false;
     }
+    /************************************************** END ***************************************************/
     //endregion
 
     //region Unmodifiziert

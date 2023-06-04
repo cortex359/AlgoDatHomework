@@ -38,7 +38,7 @@ korrekt aktualisiert werden. Hier ist der Algorithmus für die Einfügeoperation
    konstanter Zeit erfolgen, da die zusätzlichen Informationen in jedem Knoten gespeichert sind.
 
 Beim Löschen eines Knotens aus dem binären Suchbaum müssen wir ebenfalls sicherstellen, dass die zusätzlichen
-Informationen korrekt aktualisiert werden. Hier ist der Algorithmus für die Löschoperation:
+Informationen korrekt aktualisiert werden.
 
 1. Wenn der zu löschende Knoten ein Blattknoten (ohne Kinder) ist, kann er einfach entfernt werden. In diesem Fall
    müssen wir die zusätzlichen Informationen im gesamten Pfad von der Wurzel zum gelöschten Knoten aktualisieren. Dazu

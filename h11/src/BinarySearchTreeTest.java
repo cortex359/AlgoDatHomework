@@ -1,3 +1,15 @@
+/**
+ * BinarySearchTree 3
+ * ==================
+ * Hausaufgabe 11: Erweiterung um Mittelwert Funktion in O(1).
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 30.05.2023
+ * Abgabe der Loesungen am 04.06.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class BinarySearchTreeTest {
 
     private static BinarySearchTree2 randomTree() {
