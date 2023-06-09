@@ -20,7 +20,7 @@ public class DijkstraTest {
         });
         System.out.println();
 
-        Dijkstra.printDijkstra(new int[]{5});
+        Dijkstra.printDijkstra(new int[]{1});
 
         try {
             Dijkstra.printDijkstra(new int[]{});
