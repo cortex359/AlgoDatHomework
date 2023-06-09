@@ -3,10 +3,8 @@ import java.util.regex.PatternSyntaxException;
 public class TextSearch {
     public static ArrayList<Integer> textSearch(String text, String pattern) {
         ArrayList<Integer> indices = new ArrayList<>();
-        int textLength = text.length();
-        int patternLength = pattern.length();
-        
-        for (int i = 0; i <= textLength - patternLength; i++) {
+
+        for (int i = 0; i <= text.length(); i++) {
             if (isMatch(text, i, pattern)) {
                 indices.add(i);
             }
@@ -16,11 +14,10 @@ public class TextSearch {
     }
     
     private static boolean isMatch(String text, int startIndex, String pattern) {
-        int textLength = text.length();
-        int patternLength = pattern.length();
+
         
-        for (int i = 0; i < patternLength; i++) {
-            if (startIndex + i >= textLength) {
+        for (int i = 0; i < pattern.length(); i++) {
+            if (startIndex + i >= text.length()) {
                 return false;  // Pattern exceeds remaining text length
             }
             
@@ -42,7 +39,7 @@ public class TextSearch {
                 } else {
                     return false;  // Character class mismatch
                 }
-            } else if (patternChar == '\\' && i < patternLength - 1) {
+            } else if (patternChar == '\\' && i < pattern.length() - 1) {
                 char escapedChar = pattern.charAt(i + 1);
                 if (escapedChar == '.' || escapedChar == '[' || escapedChar == '\\') {
                     patternChar = escapedChar;  // Treat escaped character as normal
