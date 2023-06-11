@@ -24,16 +24,16 @@ public class TextSearchTest {
             estimatedTime[0] = System.nanoTime();
             System.out.println(TextSearch.textSearch(text, pattern));
             estimatedTime[0] = System.nanoTime() - estimatedTime[0];
-            System.out.println("TextSearch hat " + estimatedTime[0]/Math.pow(10,6) + " 1s gebraucht.");
+            System.out.println("TextSearch hat " + estimatedTime[0]/Math.pow(10,6) + " ms gebraucht.");
             estimatedTime[1] = System.nanoTime();
             System.out.println(TextSearchWithAutomaton.textSearch(text, pattern));
             estimatedTime[1] = System.nanoTime() - estimatedTime[1];
-            System.out.println("TextSearchWithAutomaton hat " + estimatedTime[1]/Math.pow(10,6) + " s gebraucht.");
+            System.out.println("TextSearchWithAutomaton hat " + estimatedTime[1]/Math.pow(10,6) + " ms gebraucht.");
             long timeDifference = estimatedTime[0] - estimatedTime[1];
             if(timeDifference < 0) {
-                System.out.println("TextSearch war " + Math.abs(timeDifference)/Math.pow(10,6) + " s schneller");
+                System.out.println("TextSearch war " + Math.abs(timeDifference)/Math.pow(10,6) + " ms schneller");
             } else {
-                System.out.println("TextSearchWithAutomaton war " + timeDifference/Math.pow(10,6) + " s schneller");
+                System.out.println("TextSearchWithAutomaton war " + timeDifference/Math.pow(10,6) + " ms schneller");
             }
         } catch(PatternSyntaxException p){
             p.printStackTrace();
