@@ -13,18 +13,19 @@ public class TextSearch {
         return indices;
     }
     
-    private static boolean isMatch(String text, int startIndex, String pattern) {
+    private static boolean isMatch(String text, int textIndex, String pattern) {
 
         
         for (int i = 0; i < pattern.length(); i++) {
-            if (startIndex + i >= text.length()) {
+            if (textIndex >= text.length()) {
                 return false;  // Pattern exceeds remaining text length
             }
             
-            char textChar = text.charAt(startIndex + i);
+            char textChar = text.charAt(textIndex);
             char patternChar = pattern.charAt(i);
             
             if (patternChar == '.') {
+                textIndex++;
                 continue;  // Match any character
             } else if (patternChar == '[') {
                 int closingBracketIndex = pattern.indexOf(']', i);
@@ -35,6 +36,7 @@ public class TextSearch {
                 String characterClass = pattern.substring(i + 1, closingBracketIndex);
                 if (isCharacterClassMatch(characterClass, textChar)) {
                     i = closingBracketIndex;  // Skip to after the closing bracket
+                    textIndex++;
                     continue;
                 } else {
                     return false;  // Character class mismatch
@@ -50,6 +52,7 @@ public class TextSearch {
             if (textChar != patternChar) {
                 return false;  // Character mismatch
             }
+            textIndex++;
         }
         
         return true;
