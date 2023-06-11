@@ -5,7 +5,7 @@ import endlicher_automat.pattern.PatternNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextSearch {
+public class TextSearchWithAutomaton {
 
     public static List<Integer> textSearch(String text, String pattern) {
         PatternConstructor constructor = new PatternConstructor(pattern);
