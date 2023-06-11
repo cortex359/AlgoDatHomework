@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.PatternSyntaxException;
 
+
 public class TextSearchTest {
     public static void main(String[] args){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
