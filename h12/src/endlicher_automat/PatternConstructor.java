@@ -14,6 +14,10 @@ public class PatternConstructor {
 
     private final PatternNode startNode;
 
+    /**
+     * Konstruiert eine Linked List von Pattern-Knoten die das Pattern darstellen
+     * @param pattern umzuwandelnde Pattern
+     */
     public PatternConstructor(String pattern) {
         if (pattern.isEmpty()) {
             throw new PatternSyntaxException("Empty pattern is not allowed", pattern, -1);
@@ -31,6 +35,10 @@ public class PatternConstructor {
         }
     }
 
+    /**
+     * Parst das Pattern ab dem momentanen Index und erstellt anhand davon den naechste Pattern-Knoten
+     * @return den neuen Pattern-Knoten
+     */
     private PatternNode getNextPatternNode() {
         char c = pattern.charAt(index);
 
@@ -61,6 +69,10 @@ public class PatternConstructor {
         return new SimplePatternNode(c);
     }
 
+    /**
+     * Gibt den Startknoten zurueck
+     * @return Startknoten
+     */
     public PatternNode getStartNode() {
         return startNode;
     }
