@@ -2,6 +2,18 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Nondeterministic finite automaton
+ * ==========================================
+ * Hausaufgabe 13: NFA
+ * Algorithmen und Datenstrukturen, SoSe 2023
+ * Aufgaben vom 12.06.2023
+ * Abgabe der Loesungen am 18.06.2023
+ *
+ * @author Samuel Thesing, samuel.thesing@rwth-aachen.de
+ * @author Christian Rene Thelen, christian.thelen@rwth-aachen.de
+ * @author Michael Conrads, michael.conrads@rwth-aachen.de
+ */
 public class NFA {
 
     private record Transition(int targetNode, char transitionChar) {}
