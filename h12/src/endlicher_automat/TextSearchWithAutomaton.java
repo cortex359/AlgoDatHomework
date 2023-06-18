@@ -5,7 +5,7 @@ import endlicher_automat.pattern.PatternNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextSearch {
+public class TextSearchWithAutomaton {
 
     /**
      * Sucht alle Indexe bei denen das Pattern angewendet werden kann
